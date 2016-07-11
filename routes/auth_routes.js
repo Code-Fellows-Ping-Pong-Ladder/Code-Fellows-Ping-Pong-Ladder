@@ -9,7 +9,7 @@ const router = module.exports = exports = express.Router();
 
 router.post('/signup', bodyParser, (req, res, next) => {
   let freshUser = new User(req.body);
-  let hashedPassword = freshUser.hashedPassword();
+  let hashedPassword = freshUser.hashPassword();
   freshUser.password = hashedPassword;
   req.body.password = null;
   User.findOne({username: req.body.username}, (err, user) => {
