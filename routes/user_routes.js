@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
   });
 });
 
-router.put('/', bodyParser, (req, res, next) => {
+router.put('/', bodyParser, jwt, (req, res, next) => {
   User.findOneAndUpdate({_id: req.body._id}, req.body, (err) => {
     if (err) return next(err);
     let message = 'successfully updated';
