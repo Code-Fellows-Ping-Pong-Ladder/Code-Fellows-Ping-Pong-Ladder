@@ -3,7 +3,7 @@
 const express = require('express');
 const User = require('../model/user');
 const bodyParser = require('body-parser').json();
-const jwt = require('..lib/jwt_auth');
+const jwt = require('../lib/jwt_auth');
 
 const router = module.exports = exports = express.Router();
 
@@ -11,6 +11,14 @@ router.get('/', (req, res, next) => {
   User.find({}, (err, users) => {
     if(err) return next(err);
     res.json(users);
+  });
+});
+
+router.get('/:id', (req, res, next) => {
+  let _id = req.params.id;
+  User.findOne({_id}, (err, user) => {
+    if (err) return next(err);
+    res.json({user});
   });
 });
 
