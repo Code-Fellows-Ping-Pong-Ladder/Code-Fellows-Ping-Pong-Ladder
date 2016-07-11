@@ -3,7 +3,7 @@
 const express = require('express');
 const User = require('../model/user');
 const bodyParser = require('body-parser').json();
-const jwt = require('..lib/jwt_auth');
+const jwt = require('../lib/jwt_auth');
 
 const router = module.exports = exports = express.Router();
 
