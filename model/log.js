@@ -1,3 +1,5 @@
+'use strict';
+
 const mongoose = require('mongoose');
 
 const Log = new mongoose.Schema({
@@ -6,6 +8,6 @@ const Log = new mongoose.Schema({
   winnerRank: Number,
   loserRank: Number,
   time: Function
-})
+});
 
 module.exports = mongoose.model('log', Log);
