@@ -12,8 +12,9 @@
     <div ng-controller="LogController as logctrl" ng-init="logctrl.getLogs()">
       <log-directive logs="logctrl.logs"></log-directive>
     </div>
-    <signin-directive></signin-directive>
-    <signup-directive></signup-directive>
+    <!-- <signin-directive></signin-directive>
+    <signup-directive></signup-directive> -->
+    <ng-view></ng-view>
     <script src="./bundle.js"></script>
   </body>
 </html>
