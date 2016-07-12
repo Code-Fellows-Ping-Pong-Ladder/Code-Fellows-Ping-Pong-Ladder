@@ -4,6 +4,9 @@ const express = require('express');
 const bodyParser = require('body-parser').json();
 const User = require('../model/user');
 const basicHTTP = require('../lib/basic_http');
+const jwt = require('jsonwebtoken');
+
+const secret = process.env.SECRET || 'changeme';
 
 const router = module.exports = exports = express.Router();
 
@@ -16,7 +19,13 @@ router.post('/signup', bodyParser, (req, res, next) => {
     if (err || user) return next(new Error('Error. Someone else may have this username already.'));
     freshUser.save((err, user) => {
       if (err) return next(new Error('Could not save user info. Please try again.'));
-      res.json({token: user.generateToken()});
+      let newToken = user.generateToken();
+      try {
+        let decodedToken = jwt.verify(newToken, secret);
+      } catch(e) {
+        return next('couldnt verify');
+      }
+      res.json({_id: user._id, token: newToken});
     });
   });
 });

@@ -3,10 +3,11 @@
 const gulp = require('gulp');
 const webpack = require('webpack-stream');
 const clean = require('gulp-clean');
+const mocha = require('gulp-mocha');
 
 const paths = {
   js: __dirname + '/app/**/*.js',
-  html: __dirname + '/app/index.html',
+  html: __dirname + '/app/**/*.html',
   css: __dirname + '/app/**/*.css'
 };
 
@@ -45,10 +46,15 @@ gulp.task('bundle:test', () => {
     .pipe(gulp.dest(__dirname + '/test'));
 });
 
+gulp.task('test', () => {
+  gulp.src('test/*.js')
+  .pipe(mocha());
+});
+
 gulp.task('watch', ()=>{
   gulp.watch('./app/*', ['build']);
 });
 
-gulp.task('build', ['clean', 'copy', 'bundle']);
+gulp.task('build', ['clean', 'copy-html', 'copy-css', 'bundle']);
 
-gulp.task('default', ['build']);
+gulp.task('default', ['build', 'test']);
