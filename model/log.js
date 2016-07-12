@@ -7,6 +7,7 @@ const Log = new mongoose.Schema({
   loser: String,
   winnerRank: Number,
   loserRank: Number,
+  upset: Boolean,
   time: Date
 });
 
