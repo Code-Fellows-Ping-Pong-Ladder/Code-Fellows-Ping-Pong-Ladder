@@ -26,7 +26,7 @@ function UserController($http, $location, ErrorHandler, AuthService) {
     .then((res) => {
       this.user = res.data;
     }, ErrorHandler.logError('Error getting user'));
-  };
+  }.bind(this);
 
   this.deleteUser = function(user) {
     $http({
