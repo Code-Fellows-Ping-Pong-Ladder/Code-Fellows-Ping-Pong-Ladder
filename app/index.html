@@ -7,7 +7,8 @@
   </head>
   <body ng-app="Pong-App">
     <main ng-controller="UserController as userctrl" ng-init="userctrl.getLadder()">
-      <button ng-repeat="player in userctrl.ladder">{{player.username}}</button>
+      <!-- <button ng-repeat="player in userctrl.ladder">{{player.username}}</button> -->
+      <ladder-directive ladder="userctrl.ladder"></ladder-directive>
       <profile-directive></profile-directive>
     </main>
     <script src="./bundle.js"></script>
