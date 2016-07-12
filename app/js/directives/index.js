@@ -1,0 +1,5 @@
+'use strict';
+
+module.exports = function(app) {
+  require('./log_directive')(app);
+};

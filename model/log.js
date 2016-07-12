@@ -8,7 +8,7 @@ const Log = new mongoose.Schema({
   winnerRank: Number,
   loserRank: Number,
   upset: Boolean,
-  time: Date
+  time: String
 });
 
 module.exports = mongoose.model('log', Log);
