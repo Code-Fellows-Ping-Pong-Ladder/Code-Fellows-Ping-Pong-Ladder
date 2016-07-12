@@ -58,21 +58,4 @@ function UserController($http, $location, ErrorHandler, AuthService) {
 
     }, ErrorHandler.logError('Error deleting user'));
   }.bind(this);
-
-
 }
-
-
-// $http({
-//   method: 'PUT',
-//   data: this.ladder[i],
-//   headers: {
-//     token: AuthService.getToken()
-//   },
-//   url: url
-// })
-// .then(() => {
-//   this.ladder = this.ladder.map((u) => {
-//     return u._id === this.ladder[i] ?
-//   })
-// })
