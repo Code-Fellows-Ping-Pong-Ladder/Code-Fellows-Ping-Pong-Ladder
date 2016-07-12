@@ -4,6 +4,7 @@ module.exports = function(app) {
   app.directive('profileDirective', function() {
     return {
       scope: {
+        user: '='
       },
       templateUrl: './templates/profile_directive.html',
       require: '^^ngController',

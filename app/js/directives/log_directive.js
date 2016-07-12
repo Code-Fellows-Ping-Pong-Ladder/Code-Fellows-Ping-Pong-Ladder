@@ -9,6 +9,6 @@ module.exports = function(app) {
       link: function($scope, elem, attr, controller) {
         $scope.getLogs = controller.getLogs;
       }
-    }
-  })
-}
+    };
+  });
+};
