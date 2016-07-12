@@ -11,6 +11,9 @@
       <ladder-directive ladder="userctrl.ladder"></ladder-directive>
       <profile-directive></profile-directive>
     </main>
+    <div ng-controller="LogController as logctrl" ng-init="logctrl.getLogs()">
+      <log-directive logs="logctrl.logs"></log-directive>
+    </div>
     <script src="./bundle.js"></script>
   </body>
 </html>
