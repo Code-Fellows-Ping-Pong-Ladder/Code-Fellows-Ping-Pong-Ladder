@@ -10,7 +10,7 @@ function LogController($http, ErrorHandler) {
     winner: 'testWinner',
     loser: 'testLoser',
     winnerRank: 1,
-    loserRank: 2,
+    loserRank: 2
   }];
 
   this.getLogs = function() {
@@ -27,6 +27,8 @@ function LogController($http, ErrorHandler) {
   this.postLog = function(user, challenger, unseat) {
     let winner;
     let loser;
+    let upset;
+    let t = new Date();
     if (!unseat) {
       winner = user;
       loser = challenger;
@@ -35,20 +37,20 @@ function LogController($http, ErrorHandler) {
       winner = challenger;
       loser = user;
       upset = true;
-    };
+    }
     let newLog = {
       winner: winner.username,
       loser: loser.username,
-      time: new Date().toString(),
+      time: t.toLocaleTimeString() + ' on ' + t.toDateString(),
       winnerRank: winner.rank,
       loserRank: loser.rank,
       upset: upset
 
-    }
+    };
     $http.post('http://localhost:3000/log')
       .send(newLog)
-      .then((res) => {
+      .then(() => {
         this.getLogs();
       }), ErrorHandler.logError('error posting log');
   };
-};
+}

@@ -1,0 +1,9 @@
+<main ng-controller="AuthController as authctrl">
+  <h1>Create an account</h1>
+  <form ng-submit="authctrl.signUp(authctrl.newUser)">
+    <input type="text" ng-model="authctrl.newUser.username" placeholder="Enter username"/>
+    <input type="password" ng-model="authctrl.newUser.password" placeholder="Enter password"/>
+    <textarea ng-model="authctrl.newUser.quote" maxlength="140" placeholder="Got some thing to say? (in under 140 characters)"></textarea>
+    <button type="submit">Sign up</button>
+  </form>
+</main>
