@@ -1,9 +1,9 @@
 'use strict';
 
 const angular = require('angular');
-const ngRoute = require('angular-route');
+//const ngRoute = require('angular-route');
 
-const app = angular.module('Pong-App', [ngRoute]);
+const app = angular.module('Pong-App', []);
 
 require('./services')(app);
 require('./controllers')(app);
