@@ -1,0 +1,6 @@
+<main ng-controller="UserController as userctrl" ng-init="userctrl.getLadder()">
+  <ladder-directive ladder="userctrl.ladder"></ladder-directive>
+</main>
+<div ng-controller="LogController as logctrl" ng-init="logctrl.getLogs()">
+  <log-directive logs="logctrl.logs"></log-directive>
+</div>

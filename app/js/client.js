@@ -14,5 +14,10 @@ app.config(function($routeProvider) {
     templateUrl: './templates/partials/home.html',
     controller: 'AuthController',
     controllerAs: 'authctrl'
+  })
+  .when('/ladder', {
+    templateUrl: './templates/partials/ladder.html',
+    controller: 'UserController',
+    controllerAs: 'userctrl'
   });
 });
