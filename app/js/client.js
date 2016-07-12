@@ -19,5 +19,8 @@ app.config(function($routeProvider) {
     templateUrl: './templates/partials/ladder.html',
     controller: 'UserController',
     controllerAs: 'userctrl'
+  })
+  .when('/signup', {
+    templateUrl: './templates/signup_directive.html'
   });
 });
