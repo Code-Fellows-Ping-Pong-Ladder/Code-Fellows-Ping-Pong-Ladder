@@ -6,13 +6,19 @@ module.exports = function(app){
 
 function LogController($http, ErrorHandler) {
   this.$http = $http;
-  this.log = [];
+  this.logs = [{
+    winner: 'testWinner',
+    loser: 'testLoser',
+    winnerRank: 1,
+    loserRank: 2,
+  }];
 
-  this.getLog = function() {
-    $http.get('localhost:3000/log')
+  this.getLogs = function() {
+
+    $http.get('http://localhost:3000/log')
     .then((res) => {
       let returnedLogs = res.data;
-      this.log = returnedLogs.sort(function(a, b) {
+      this.logs = returnedLogs.sort(function(a, b) {
         return new Date(b.time) - new Date(a.time);
       });
     }, ErrorHandler.logError('Error getting logs'));
@@ -33,16 +39,16 @@ function LogController($http, ErrorHandler) {
     let newLog = {
       winner: winner.username,
       loser: loser.username,
-      date: new Date(),
+      time: new Date().toString(),
       winnerRank: winner.rank,
       loserRank: loser.rank,
       upset: upset
 
     }
-    $http.post('localhost:3000/log')
+    $http.post('http://localhost:3000/log')
       .send(newLog)
       .then((res) => {
-        this.getLog();
+        this.getLogs();
       }), ErrorHandler.logError('error posting log');
   };
 };
