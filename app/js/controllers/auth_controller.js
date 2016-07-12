@@ -36,5 +36,9 @@ module.exports = function(app) {
            console.log(err);
          });
     };
+
+    this.goToSignUp = function() {
+      $location.path('/signup');
+    };
   });
 };
