@@ -30,20 +30,15 @@ app.config(function($routeProvider) {
     controller: 'PlayerController',
     resolve: {
       player: function($route, $http) {
-        var id = $route.current.params.id;
-        // var player = playerServices.getPlayer(id);
-        // return player;
-        $http.get('http://localhost:3000/users/' + id)
+        let id = $route.current.params.id;
+        let profileData = $http.get('http://localhost:3000/users/' + id)
         .then((res) => {
-          var goose = res.data.user;
-          console.log(goose);
-          return goose;
+          let player = res.data.user;
+          return player;
         });
-        // return {
-        //   username: 'vic',
-        //   wins: 3,
-        //   losses: 4
-        // }
+
+        return profileData;
+
       }
     }
   });
