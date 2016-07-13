@@ -48,7 +48,9 @@ function UserController($http, $location, ErrorHandler, AuthService, NavigationS
 
   this.finishMatch = function(challenger, upset) {
     let user = AuthService.getCurrentUserNoJSON();
-    user.hasChallenge = null;
+    console.log('USER', user);
+    this.user.user.hasChallenge = null;
+    console.log('USER AFTER NULL', user);
     let winner;
     let loser;
     let challengerRank = challenger.rank;
@@ -105,7 +107,7 @@ function UserController($http, $location, ErrorHandler, AuthService, NavigationS
         data: log
       })
     )
-  };
+  }.bind(this);
 
   this.deleteUser = function(user) {
     $http({
