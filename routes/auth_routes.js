@@ -4,9 +4,6 @@ const express = require('express');
 const bodyParser = require('body-parser').json();
 const User = require('../model/user');
 const basicHTTP = require('../lib/basic_http');
-const jwt = require('jsonwebtoken');
-
-const secret = process.env.SECRET || 'changeme';
 
 const router = module.exports = exports = express.Router();
 

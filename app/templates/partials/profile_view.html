@@ -1,0 +1,15 @@
+<section>
+  <button class="edit" ng-click="goToEdit()">Edit</button>
+  <h1>username: {{player.username}}</h1>
+  <div>
+    <ul class="profile">
+      <li>{{player.quote}}</li>
+      <li>Record:<span>Wins: {{player.wins}}</span><span>Losses: {{player.losses}}</span></li>
+      <li>Win Streak: {{player.wStreak}}</li>
+      <li>Loss Streak: {{player.lStreak}}</li>
+      <li>Rank: {{player.rank}}</li>
+      <li>Longest Win Streak: {{player.longestWStreak}}</li>
+      <li>Longest Loss Streak: {{player.longestLStreak}}</li>
+    </ul>
+  </div>
+</section>

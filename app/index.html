@@ -2,18 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link type="text/css" rel="stylesheet" href="./style.css">
+    <link type="text/css" rel="stylesheet" href="./css/style.css">
     <title></title>
   </head>
   <body ng-app="Pong-App">
-    <main ng-controller="UserController as userctrl" ng-init="userctrl.getLadder()">
-      <ladder-directive ladder="userctrl.ladder"></ladder-directive>
-    </main>
-    <div ng-controller="LogController as logctrl" ng-init="logctrl.getLogs()">
-      <log-directive logs="logctrl.logs"></log-directive>
-    </div>
-    <signin-directive></signin-directive>
-    <signup-directive></signup-directive>
+    <ng-view></ng-view>
     <script src="./bundle.js"></script>
   </body>
 </html>

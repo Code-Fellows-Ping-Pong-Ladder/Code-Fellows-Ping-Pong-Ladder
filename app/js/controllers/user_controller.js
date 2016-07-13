@@ -1,22 +1,31 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('UserController', ['$http', '$location', 'ErrorHandler', 'AuthService', UserController]);
+  app.controller('UserController', ['$http', '$location', 'ErrorHandler', 'AuthService', 'NavigationService', UserController]);
 };
 
-function UserController($http, $location, ErrorHandler, AuthService) {
+function UserController($http, $location, ErrorHandler, AuthService, NavigationService) {
   this.$http = $http;
   this.ladder = [];
   this.user;
+  this.selectedPlayer = {};
+  // console.log('id', playerID && playerID.id );
 
   const url = 'http://localhost:3000/users/';
 
   this.getLadder = function() {
+    let currentUser = AuthService.getCurrentUserNoJSON();
     $http.get(url)
     .then((res) => {
       let users = res.data;
       this.ladder = users.sort(function(a,b) {
         return a.rank - b.rank;
+      }).map((user) => {
+        if (user.rank + 2 >= currentUser.rank && user.rank !== currentUser.rank) {
+          user.canChallenge = true;
+          console.log('user.canChallenge', user.canChallenge);
+        };
+        return user;
       });
     }, ErrorHandler.logError('Error getting users'));
   };
@@ -29,8 +38,8 @@ function UserController($http, $location, ErrorHandler, AuthService) {
   }.bind(this);
 
   this.challenge = function(user) {
-    user.hasChallenge = AuthService.getCurrentUser();
-    $http.put('http://localhost:3000/challenge', user)
+    user.hasChallenge = AuthService.getCurrentUserNoJSON();
+    $http.put('http://localhost:3000/users/challenge', user)
     .then(() =>{
 
     }, ErrorHandler.logError(`Error adding challenge to ${user.username}.`));
@@ -81,5 +90,11 @@ function UserController($http, $location, ErrorHandler, AuthService) {
       }
 
     }, ErrorHandler.logError('Error deleting user'));
+  }.bind(this);
+
+  this.goToProfile = function(player) {
+    this.selectedPlayer = player;
+    NavigationService.goToProfile(player);
+
   }.bind(this);
 }

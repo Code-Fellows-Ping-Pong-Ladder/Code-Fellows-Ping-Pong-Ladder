@@ -10,6 +10,8 @@ module.exports = function(app) {
       require: '^^ngController',
       link: function($scope, elem, attr, controller) {
         $scope.getLadder = controller.getLadder;
+        $scope.goToProfile = controller.goToProfile;
+        $scope.challenge = controller.challenge;
       }
     };
   });
