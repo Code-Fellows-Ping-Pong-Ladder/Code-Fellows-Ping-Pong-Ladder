@@ -14,11 +14,17 @@ function UserController($http, $location, ErrorHandler, AuthService) {
   const url = 'http://localhost:3000/users/';
 
   this.getLadder = function() {
+    let currentUser = AuthService.getCurrentUserNoJSON();
     $http.get(url)
     .then((res) => {
       let users = res.data;
       this.ladder = users.sort(function(a,b) {
         return a.rank - b.rank;
+      }).map((user) => {
+        if (user.rank + 2 >= currentUser.rank && user.rank !== currentUser.rank) {
+          user.canChallenge = true;
+        };
+        return user;
       });
     }, ErrorHandler.logError('Error getting users'));
   };
