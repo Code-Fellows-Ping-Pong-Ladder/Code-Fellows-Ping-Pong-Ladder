@@ -12,6 +12,7 @@ function LogController($http, ErrorHandler) {
     winnerRank: 1,
     loserRank: 2
   }];
+  this.showLogs;
 
   this.getLogs = function() {
 
