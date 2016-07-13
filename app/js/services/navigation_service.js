@@ -12,8 +12,8 @@ module.exports = function(app) {
       $location.path('/profile/' + player._id);
     };
 
-    service.goToEdit = function(player) {
-      $location.path('/edit/' + player._id);
+    service.goToEdit = function() {
+      $location.path('/edit');
     };
 
     service.goHome = function() {

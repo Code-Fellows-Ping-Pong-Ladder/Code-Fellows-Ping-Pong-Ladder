@@ -4,6 +4,7 @@
     <form ng-submit="authctrl.signup(authctrl.newUser)">
       <input type="text" ng-model="authctrl.newUser.username" placeholder="Enter username"/>
       <input type="password" ng-model="authctrl.newUser.password" placeholder="Enter password"/>
+      <input type="text" ng-model="authctrl.newUser.image" placeholder="Add image url"/>
       <textarea ng-model="authctrl.newUser.quote" maxlength="140" placeholder="Got some thing to say? (in under 140 characters)"></textarea>
       <button type="submit">Sign up</button>
     </form>

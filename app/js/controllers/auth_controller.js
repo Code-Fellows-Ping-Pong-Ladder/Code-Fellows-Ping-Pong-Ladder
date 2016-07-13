@@ -31,6 +31,8 @@ function AuthController($location, AuthService, NavigationService) {
        });
   };
 
+  this.updateProfile = AuthService.updateProfile;
+
   this.signOut = function() {
     AuthService.signOut()
        .then((res) => {
