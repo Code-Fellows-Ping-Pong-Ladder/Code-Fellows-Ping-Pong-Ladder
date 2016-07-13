@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-  app.factory('AuthService', function($http, $window) {
+  app.factory('AuthService', function($http, $window, NavigationService) {
     let token = $window.localStorage.token;
     let currentUser = $window.localStorage.currentUser || null;
     const service = {};
@@ -38,6 +38,7 @@ module.exports = function(app) {
     };
 
     service.updateProfile = function(player) {
+      currentUser = JSON.parse(currentUser);
       currentUser.quote = player.quote != null ? player.quote : currentUser.quote;
       currentUser.image = player.image != null ? player.image : currentUser.image;
       return $http({
@@ -48,6 +49,7 @@ module.exports = function(app) {
           token: token
         }
       }).then((res) => {
+        NavigationService.goToProfile(currentUser);
         currentUser = $window.localStorage.currentUser = JSON.stringify(currentUser);
         return res;
       });
