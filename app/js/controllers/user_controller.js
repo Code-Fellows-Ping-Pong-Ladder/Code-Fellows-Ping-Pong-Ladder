@@ -23,6 +23,7 @@ function UserController($http, $location, ErrorHandler, AuthService) {
       }).map((user) => {
         if (user.rank + 2 >= currentUser.rank && user.rank !== currentUser.rank) {
           user.canChallenge = true;
+          console.log('user.canChallenge', user.canChallenge);
         };
         return user;
       });
@@ -37,8 +38,8 @@ function UserController($http, $location, ErrorHandler, AuthService) {
   }.bind(this);
 
   this.challenge = function(user) {
-    user.hasChallenge = AuthService.getCurrentUser();
-    $http.put('http://localhost:3000/challenge', user)
+    user.hasChallenge = AuthService.getCurrentUserNoJSON();
+    $http.put('http://localhost:3000/users/challenge', user)
     .then(() =>{
 
     }, ErrorHandler.logError(`Error adding challenge to ${user.username}.`));

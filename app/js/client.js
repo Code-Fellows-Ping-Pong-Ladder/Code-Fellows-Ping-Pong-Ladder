@@ -36,9 +36,7 @@ app.config(function($routeProvider) {
           let player = res.data.user;
           return player;
         });
-
         return profileData;
-
       }
     }
   });
