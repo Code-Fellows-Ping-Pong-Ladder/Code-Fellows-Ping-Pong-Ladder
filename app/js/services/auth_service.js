@@ -50,6 +50,10 @@ module.exports = function(app) {
       return JSON.parse(currentUser);
     };
 
+    service.getCurrentUserNoJSON = function() {
+      return currentUser;
+    }
+
     return service;
   });
 };
