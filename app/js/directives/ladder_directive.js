@@ -11,6 +11,7 @@ module.exports = function(app) {
       link: function($scope, elem, attr, controller) {
         $scope.getLadder = controller.getLadder;
         $scope.goToProfilePage = controller.goToProfilePage;
+        $scope.challenge = controller.challenge;
       }
     };
   });

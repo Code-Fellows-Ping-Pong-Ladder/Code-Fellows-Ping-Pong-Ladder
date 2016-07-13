@@ -23,6 +23,7 @@ function UserController($http, $location, ErrorHandler, AuthService) {
       }).map((user) => {
         if (user.rank + 2 >= currentUser.rank && user.rank !== currentUser.rank) {
           user.canChallenge = true;
+          console.log('user.canChallenge', user.canChallenge);
         };
         return user;
       });
