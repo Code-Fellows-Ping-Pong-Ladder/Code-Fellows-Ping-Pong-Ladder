@@ -46,9 +46,38 @@ function UserController($http, $location, ErrorHandler, AuthService, NavigationS
     }, ErrorHandler.logError(`Error adding challenge to ${user.username}.`));
   };
 
-  this.finishMatch = function() {
-    let user = AuthService.getCurrentUser();
+  this.finishMatch = function(challenger, upset) {
+    let user = AuthService.getCurrentUserNoJSON();
     user.hasChallenge = null;
+    let winner;
+    let loser;
+    let challengerRank = challenger.rank;
+    let userRank = user.rank;
+    if (!upset && userRank > challengerRank) {
+      winner = user;
+      loser = challenger;
+      challenger.rank = userRank;
+      user.rank = challengerRank;
+    } else if (!upset && userRank < challengerRank) {
+      winner = user;
+      loser = challenger;
+    } else if (upset && userRank > challengerRank) {
+      winner = challenger;
+      loser = user;
+    } else if (upset && userRank < challengerRank) {
+      winner = challenger;
+      loser = user;
+      challenger.rank = userRank;
+      user.rank = challengerRank;
+    }
+    let log = {
+      winner: winner.username,
+      loser: loser.username,
+      winnerRank: winner.rank,
+      loserRank: loser.rank,
+      time: new Date().toString()
+
+    }
     $http({
       method: 'PUT',
       data: user,
@@ -58,7 +87,20 @@ function UserController($http, $location, ErrorHandler, AuthService, NavigationS
       url: url
     })
     .then(
-      // POST to log?
+      $http({
+        method: 'PUT',
+        url: url + '/challenge',
+        data: challenger
+      })
+    )
+    .then(
+      $http({
+        method: 'POST',
+        url: 'http://localhost:3000/log',
+        data: log
+      })
+    ).then(
+      this.getLadder()
     );
   };
 
