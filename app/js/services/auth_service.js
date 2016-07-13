@@ -6,7 +6,7 @@ module.exports = function(app) {
     let currentUser = $window.localStorage.currentUser || null;
     const service = {};
 
-    service.signUp = function(user) {
+    service.signup = function(user) {
       return $http.post('http://localhost:3000/auth/signup', user)
       .then((res) => {
         console.log(res.data);
@@ -37,8 +37,9 @@ module.exports = function(app) {
       });
     };
 
-    service.logOut = function() {
+    service.signOut = function() {
       token = $window.localStorage.token = null;
+      currentUser = $window.localStorage.currentUser = null;
     };
 
     service.getToken = function() {

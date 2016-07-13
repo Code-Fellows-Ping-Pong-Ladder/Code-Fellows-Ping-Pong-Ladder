@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-  app.factory('NavigationService', function($http, $location) {
+  app.factory('NavigationService', function($location) {
     const service = {};
 
     service.goToLadder = function() {
@@ -16,8 +16,13 @@ module.exports = function(app) {
       $location.path('/edit/' + player._id);
     };
 
-    service.goToSignin = function() {
+    service.goHome = function() {
       $location.path('/');
     };
+
+    service.goToSignup = function() {
+      $location.path('/signup');
+    };
+    return service;
   });
 };

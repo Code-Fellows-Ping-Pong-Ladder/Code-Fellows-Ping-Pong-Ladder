@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('UserController', ['$http', '$location', 'ErrorHandler', 'AuthService', UserController]);
+  app.controller('UserController', ['$http', '$location', 'ErrorHandler', 'AuthService', 'NavigationService', UserController]);
 };
 
-function UserController($http, $location, ErrorHandler, AuthService) {
+function UserController($http, $location, ErrorHandler, AuthService, NavigationService) {
   this.$http = $http;
   this.ladder = [];
   this.user;
@@ -85,9 +85,9 @@ function UserController($http, $location, ErrorHandler, AuthService) {
     }, ErrorHandler.logError('Error deleting user'));
   }.bind(this);
 
-  this.goToProfilePage = function(player) {
+  this.goToProfile = function(player) {
     this.selectedPlayer = player;
-    $location.path('/profile/' + player._id);
+    NavigationService.goToProfile(player);
 
   }.bind(this);
 }
