@@ -53,31 +53,36 @@ function UserController($http, $location, ErrorHandler, AuthService, NavigationS
     let loser;
     let challengerRank = challenger.rank;
     let userRank = user.rank;
+    let log = {
+      time: new Date().toString()
+    };
     if (!upset && userRank > challengerRank) {
       winner = user;
       loser = challenger;
+      log.winnerRank = userRank;
+      log.loserRank = challengerRank;
       challenger.rank = userRank;
       user.rank = challengerRank;
     } else if (!upset && userRank < challengerRank) {
       winner = user;
       loser = challenger;
+      log.winnerRank = winner.rank;
+      log.loserRank = loser.rank;
     } else if (upset && userRank > challengerRank) {
       winner = challenger;
       loser = user;
+      log.winnerRank = winner.rank;
+      log.loserRank = loser.rank;
     } else if (upset && userRank < challengerRank) {
       winner = challenger;
       loser = user;
+      log.winnerRank = challenger.rank;
+      log.loserRank = user.rank;
       challenger.rank = userRank;
       user.rank = challengerRank;
     }
-    let log = {
-      winner: winner.username,
-      loser: loser.username,
-      winnerRank: winner.rank,
-      loserRank: loser.rank,
-      time: new Date().toString()
-
-    }
+    log.winner = winner.username;
+    log.loser = loser.username;
     $http({
       method: 'PUT',
       data: user,
