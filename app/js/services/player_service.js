@@ -15,8 +15,8 @@ module.exports = function(app) {
       $http.get('http://localhost:3000/users/' + id)
       .then((res) => {
         console.log('res.data', res.data.user);
-        var player = res.data.user;
-        return player;
+        var goose = res.data.user;
+        return goose;
       });
     };
 

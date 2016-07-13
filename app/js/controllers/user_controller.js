@@ -86,9 +86,7 @@ function UserController($http, $location, ErrorHandler, AuthService) {
   }.bind(this);
 
   this.goToProfilePage = function(player) {
-    console.log('player', player);
     this.selectedPlayer = player;
-    console.log('selectedPlayer', this.selectedPlayer);
     $location.path('/profile/' + player._id);
 
   }.bind(this);

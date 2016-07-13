@@ -33,17 +33,17 @@ app.config(function($routeProvider) {
         var id = $route.current.params.id;
         // var player = playerServices.getPlayer(id);
         // return player;
-        // $http.get('http://localhost:3000/users/' + id)
-        // .then((res) => {
-        //   console.log('res.data', res.data.user);
-        //   var player = res.data.user;
-        //   return player;
-        // });
-        return {
-          username: 'vic',
-          wins: 3,
-          losses: 4
-        }
+        $http.get('http://localhost:3000/users/' + id)
+        .then((res) => {
+          var goose = res.data.user;
+          console.log(goose);
+          return goose;
+        });
+        // return {
+        //   username: 'vic',
+        //   wins: 3,
+        //   losses: 4
+        // }
       }
     }
   });
