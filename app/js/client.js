@@ -25,6 +25,11 @@ app.config(function($routeProvider) {
     controller: 'AuthController',
     controllerAs: 'authctrl'
   })
+  .when('/edit', {
+    templateUrl: './templates/edit_directive.html',
+    controller: 'AuthController',
+    controllerAs: 'authctrl'
+  })
   .when('/profile/:id', {
     templateUrl: './templates/partials/profile_view.html',
     controller: 'PlayerController',
