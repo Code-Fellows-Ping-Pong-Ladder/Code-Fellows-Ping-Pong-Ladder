@@ -9,7 +9,8 @@ module.exports = function(app) {
       templateUrl: './templates/challenge_directive.html',
       require: '^^ngController',
       link: function($scope, elem, attr, controller) {
-        
+        $scope.finishMatch = controller.finishMatch;
+        $scope.getLadder = controller.getLadder;
       }
     };
   });
