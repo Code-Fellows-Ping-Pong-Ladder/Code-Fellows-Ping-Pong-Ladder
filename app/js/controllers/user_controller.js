@@ -9,6 +9,7 @@ function UserController($http, $location, ErrorHandler, AuthService, NavigationS
   this.ladder = [];
   this.user;
   this.selectedPlayer = {};
+  this.loggedInUser = AuthService.getCurrentUserNoJSON();
   // console.log('id', playerID && playerID.id );
 
   const url = 'http://localhost:3000/users/';
