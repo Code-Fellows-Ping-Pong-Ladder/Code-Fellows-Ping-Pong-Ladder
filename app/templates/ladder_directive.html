@@ -1,8 +1,8 @@
 <section>
   <ul>
     <li ng-repeat="player in ladder">
-      <button ng-click="profile = !profile">{{player.username}}</button>
-      <profile-directive ng-hide="!profile" user="player"></profile-directive>
+      <button ng-click="goToProfilePage(player)">{{player.username}}</button>
+      <!-- <profile-directive ng-hide="!profile" user="player"></profile-directive> -->
     </li>
   </ul>
 </section>

@@ -19,7 +19,7 @@ module.exports = function(app) {
       AuthService.signIn(user)
          .then((res) => {
            console.log(res);
-           $location.path('/');
+           $location.path('/ladder');
          })
          .then(null, (err) => {
            console.log(err);
@@ -35,6 +35,10 @@ module.exports = function(app) {
          .catch((err) => {
            console.log(err);
          });
+    };
+
+    this.goToSignUp = function() {
+      $location.path('/signup');
     };
   });
 };
