@@ -8,6 +8,8 @@ function UserController($http, $location, ErrorHandler, AuthService) {
   this.$http = $http;
   this.ladder = [];
   this.user;
+  this.selectedPlayer = {};
+  // console.log('id', playerID && playerID.id );
 
   const url = 'http://localhost:3000/users/';
 
@@ -57,5 +59,13 @@ function UserController($http, $location, ErrorHandler, AuthService) {
       }
 
     }, ErrorHandler.logError('Error deleting user'));
+  }.bind(this);
+
+  this.goToProfilePage = function(player) {
+    console.log('player', player);
+    this.selectedPlayer = player;
+    console.log('selectedPlayer', this.selectedPlayer);
+    $location.path('/profile');
+
   }.bind(this);
 }

@@ -21,6 +21,19 @@ app.config(function($routeProvider) {
     controllerAs: 'userctrl'
   })
   .when('/signup', {
-    templateUrl: './templates/signup_directive.html'
+    templateUrl: './templates/signup_directive.html',
+    controller: 'AuthController',
+    controllerAs: 'authctrl'
+  })
+  .when('/profile', {
+    templateUrl: './templates/partials/profile.html',
+    controller: 'UserController',
+    controllerAs: 'userctrl'
+    // resolve: {
+    //   playerID: function($route) {
+    //     var id = $route.current.params.id;
+    //     return id;
+    //   }
+    // }
   });
 });
