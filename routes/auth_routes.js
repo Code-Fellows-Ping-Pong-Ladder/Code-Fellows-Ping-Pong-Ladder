@@ -17,11 +17,16 @@ router.post('/signup', bodyParser, (req, res, next) => {
   req.body.password = null;
   User.findOne({username: req.body.username}, (err, user) => {
     if (err || user) return next(new Error('Error. Someone else may have this username already.'));
-    let newToken = user.generateToken();
-    user.token = newToken;
-    freshUser.save((err, user) => {
-      if (err) return next(new Error('Could not save user info. Please try again.'));
-      res.json({currentUser: user, token: newToken});
+    User.find({}, (err, users) => {
+      console.log(users);
+      if (err) return next(new Error('Could not rank player'));
+      freshUser.rank = users.length + 1;
+
+      freshUser.save((err, user) => {
+        if (err) return next(new Error('Could not save user info. Please try again.'));
+        let newToken = user.generateToken();
+        res.json({currentUser: user, token: newToken});
+      });
     });
   });
 });
