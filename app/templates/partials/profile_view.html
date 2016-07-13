@@ -3,6 +3,9 @@
   <h1>username: {{player.username}}</h1>
   <div>
     <ul class="profile">
+      <div class="image">
+        <img src="{{player.image}}" title="{{player.username}}" alt="image of {{player.username}}"/>
+      </div>
       <li>{{player.quote}}</li>
       <li>Record:<span>Wins: {{player.wins}}</span><span>Losses: {{player.losses}}</span></li>
       <li>Win Streak: {{player.wStreak}}</li>

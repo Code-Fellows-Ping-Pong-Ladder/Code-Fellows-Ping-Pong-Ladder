@@ -37,6 +37,22 @@ module.exports = function(app) {
       });
     };
 
+    service.updateProfile = function(player) {
+      currentUser.quote = player.quote != null ? player.quote : currentUser.quote;
+      currentUser.image = player.image != null ? player.image : currentUser.image;
+      return $http({
+        method: 'PUT',
+        url: 'http://localhost:3000/users',
+        data: currentUser,
+        headers: {
+          token: token
+        }
+      }).then((res) => {
+        currentUser = $window.localStorage.currentUser = JSON.stringify(currentUser);
+        return res;
+      });
+    };
+
     service.signOut = function() {
       token = $window.localStorage.token = null;
       currentUser = $window.localStorage.currentUser = null;
@@ -52,7 +68,7 @@ module.exports = function(app) {
 
     service.getCurrentUserNoJSON = function() {
       return currentUser;
-    }
+    };
 
     return service;
   });

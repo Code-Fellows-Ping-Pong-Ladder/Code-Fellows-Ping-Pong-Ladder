@@ -14,4 +14,5 @@ module.exports = function(app) {
 function PlayerController($scope, player, NavigationService) {
   $scope.player = player;
   this.goHome = NavigationService.goHome;
+  $scope.goToEdit = NavigationService.goToEdit;
 }
