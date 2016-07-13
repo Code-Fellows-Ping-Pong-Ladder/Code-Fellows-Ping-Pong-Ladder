@@ -15,7 +15,7 @@ const User = new mongoose.Schema({
   rank: {type: Number},
   longestWStreak: {type: Number},
   longestLStreak: {type: Number},
-  hasChallenge: {type: Object},
+  hasChallenge: {type: Object, default: null},
   quote: {type: String}
 });
 

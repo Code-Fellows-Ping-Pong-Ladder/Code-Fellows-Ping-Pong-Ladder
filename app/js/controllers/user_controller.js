@@ -30,6 +30,30 @@ function UserController($http, $location, ErrorHandler, AuthService) {
     }, ErrorHandler.logError('Error getting user'));
   }.bind(this);
 
+  this.challenge = function(user) {
+    user.hasChallenge = AuthService.getCurrentUser();
+    $http.put('http://localhost:3000/challenge', user)
+    .then(() =>{
+
+    }, ErrorHandler.logError(`Error adding challenge to ${user.username}.`));
+  };
+
+  this.finishMatch = function() {
+    let user = AuthService.getCurrentUser();
+    user.hasChallenge = null;
+    $http({
+      method: 'PUT',
+      data: user,
+      headers: {
+        token: AuthService.getToken()
+      },
+      url: url
+    })
+    .then(
+      // POST to log?
+    );
+  };
+
   this.deleteUser = function(user) {
     $http({
       method: 'DELETE',
