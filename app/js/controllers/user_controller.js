@@ -104,9 +104,7 @@ function UserController($http, $location, ErrorHandler, AuthService, NavigationS
         url: 'http://localhost:3000/log',
         data: log
       })
-    ).then(
-      this.getLadder()
-    );
+    )
   };
 
   this.deleteUser = function(user) {
