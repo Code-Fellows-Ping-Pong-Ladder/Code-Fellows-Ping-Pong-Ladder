@@ -25,15 +25,26 @@ app.config(function($routeProvider) {
     controller: 'AuthController',
     controllerAs: 'authctrl'
   })
-  .when('/profile', {
-    templateUrl: './templates/partials/profile.html',
-    controller: 'UserController',
-    controllerAs: 'userctrl'
-    // resolve: {
-    //   playerID: function($route) {
-    //     var id = $route.current.params.id;
-    //     return id;
-    //   }
-    // }
+  .when('/profile/:id', {
+    templateUrl: './templates/partials/profile_view.html',
+    controller: 'PlayerController',
+    resolve: {
+      player: function($route, $http) {
+        var id = $route.current.params.id;
+        // var player = playerServices.getPlayer(id);
+        // return player;
+        // $http.get('http://localhost:3000/users/' + id)
+        // .then((res) => {
+        //   console.log('res.data', res.data.user);
+        //   var player = res.data.user;
+        //   return player;
+        // });
+        return {
+          username: 'vic',
+          wins: 3,
+          losses: 4
+        }
+      }
+    }
   });
 });

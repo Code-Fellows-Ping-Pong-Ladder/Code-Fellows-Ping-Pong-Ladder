@@ -65,7 +65,7 @@ function UserController($http, $location, ErrorHandler, AuthService) {
     console.log('player', player);
     this.selectedPlayer = player;
     console.log('selectedPlayer', this.selectedPlayer);
-    $location.path('/profile');
+    $location.path('/profile/' + player._id);
 
   }.bind(this);
 }
