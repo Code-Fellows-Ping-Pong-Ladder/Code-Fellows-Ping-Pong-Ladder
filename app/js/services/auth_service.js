@@ -3,13 +3,17 @@
 module.exports = function(app) {
   app.factory('AuthService', function($http, $window) {
     let token = $window.localStorage.token;
+    let currentUser = $window.localStorage.currentUser || null;
     const service = {};
 
     service.signUp = function(user) {
       return $http.post('http://localhost:3000/auth/signup', user)
       .then((res) => {
+        console.log(res.data);
         token = res.data.token;
+        currentUser = res.data.currentUser;
         $window.localStorage.token = token;
+        $window.localStorage.currentUser = JSON.stringify(currentUser);
         return res;
       });
     };
@@ -26,7 +30,9 @@ module.exports = function(app) {
         }
       }).then((res) => {
         token = res.data.token;
+        currentUser = res.data.currentUser;
         $window.localStorage.token = token;
+        $window.localStorage.currentUser = JSON.stringify(currentUser);
         return res;
       });
     };
@@ -37,6 +43,10 @@ module.exports = function(app) {
 
     service.getToken = function() {
       return token;
+    };
+
+    service.getCurrentUser = function() {
+      return JSON.parse(currentUser);
     };
 
     return service;
