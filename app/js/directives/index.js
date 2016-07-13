@@ -7,4 +7,5 @@ module.exports = function(app) {
   require('./signup_directive')(app);
   require('./ladder_directive')(app);
   require('./edit_directive')(app);
+  require('./challenge_directive')(app);
 };

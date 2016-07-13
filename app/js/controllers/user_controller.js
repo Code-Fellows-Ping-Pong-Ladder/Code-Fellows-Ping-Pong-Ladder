@@ -9,6 +9,7 @@ function UserController($http, $location, ErrorHandler, AuthService, NavigationS
   this.ladder = [];
   this.user;
   this.selectedPlayer = {};
+  this.loggedInUser = AuthService.getCurrentUserNoJSON();
   // console.log('id', playerID && playerID.id );
 
   const url = 'http://localhost:3000/users/';
@@ -45,9 +46,43 @@ function UserController($http, $location, ErrorHandler, AuthService, NavigationS
     }, ErrorHandler.logError(`Error adding challenge to ${user.username}.`));
   };
 
-  this.finishMatch = function() {
-    let user = AuthService.getCurrentUser();
+  this.finishMatch = function(challenger, upset) {
+    let user = AuthService.getCurrentUserNoJSON();
     user.hasChallenge = null;
+    let winner;
+    let loser;
+    let challengerRank = challenger.rank;
+    let userRank = user.rank;
+    let log = {
+      time: new Date().toString()
+    };
+    if (!upset && userRank > challengerRank) {
+      winner = user;
+      loser = challenger;
+      log.winnerRank = userRank;
+      log.loserRank = challengerRank;
+      challenger.rank = userRank;
+      user.rank = challengerRank;
+    } else if (!upset && userRank < challengerRank) {
+      winner = user;
+      loser = challenger;
+      log.winnerRank = winner.rank;
+      log.loserRank = loser.rank;
+    } else if (upset && userRank > challengerRank) {
+      winner = challenger;
+      loser = user;
+      log.winnerRank = winner.rank;
+      log.loserRank = loser.rank;
+    } else if (upset && userRank < challengerRank) {
+      winner = challenger;
+      loser = user;
+      log.winnerRank = challenger.rank;
+      log.loserRank = user.rank;
+      challenger.rank = userRank;
+      user.rank = challengerRank;
+    }
+    log.winner = winner.username;
+    log.loser = loser.username;
     $http({
       method: 'PUT',
       data: user,
@@ -57,7 +92,20 @@ function UserController($http, $location, ErrorHandler, AuthService, NavigationS
       url: url
     })
     .then(
-      // POST to log?
+      $http({
+        method: 'PUT',
+        url: url + '/challenge',
+        data: challenger
+      })
+    )
+    .then(
+      $http({
+        method: 'POST',
+        url: 'http://localhost:3000/log',
+        data: log
+      })
+    ).then(
+      this.getLadder()
     );
   };
 

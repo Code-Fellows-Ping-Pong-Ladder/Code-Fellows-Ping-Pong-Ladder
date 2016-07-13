@@ -1,3 +1,6 @@
+<div ng-controller="UserController as userctrl" ng-init="userctrl.getUser(userctrl.loggedInUser)">
+  <challenge-directive ng-hide="!userctrl.user.user.hasChallenge" challenger="userctrl.user.user.hasChallenge"></challenge-directive>
+</div>
 <main ng-controller="UserController as userctrl" ng-init="userctrl.getLadder()">
   <ladder-directive ladder="userctrl.ladder"></ladder-directive>
 </main>
