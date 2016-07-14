@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('UserController', ['$http', '$location', '$window', 'ErrorHandler', 'AuthService', 'NavigationService', UserController]);
+  app.controller('UserController', ['$http', '$location', '$window', 'ErrorHandler', 'AuthService', 'NavigationService', 'StatsService', UserController]);
 };
 
-function UserController($http, $location, $window, ErrorHandler, AuthService, NavigationService) {
+function UserController($http, $location, $window, ErrorHandler, AuthService, NavigationService, StatsService) {
   this.$http = $http;
   this.ladder = [];
   this.user;
@@ -94,6 +94,8 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
       challenger.rank = userRank;
       user.rank = challengerRank;
     }
+    StatsService.updateWinnerStats(winner);
+    StatsService.updateLoserStats(loser);
     log.winner = winner.username;
     log.loser = loser.username;
     $window.localStorage.currentUser = JSON.stringify(user);
