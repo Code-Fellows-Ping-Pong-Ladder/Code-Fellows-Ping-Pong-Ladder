@@ -31,9 +31,11 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
   };
 
   this.getUser = function(user) {
+    if (!user._id) user = JSON.parse(user);
     $http.get(url + user._id)
     .then((res) => {
       this.user = res.data;
+      console.log('MADE IT HERE', this.user)
     }, ErrorHandler.logError('Error getting user'));
   }.bind(this);
 
