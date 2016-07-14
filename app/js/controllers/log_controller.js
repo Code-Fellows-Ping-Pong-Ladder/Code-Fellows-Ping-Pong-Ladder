@@ -16,7 +16,7 @@ function LogController($http, ErrorHandler) {
 
   this.getLogs = function() {
 
-    $http.get('http://localhost:3000/log')
+    $http.get('/log')
     .then((res) => {
       let returnedLogs = res.data;
       this.logs = returnedLogs.sort(function(a, b) {
@@ -48,7 +48,7 @@ function LogController($http, ErrorHandler) {
       upset: upset
 
     };
-    $http.post('http://localhost:3000/log')
+    $http.post('/log')
       .send(newLog)
       .then(() => {
         this.getLogs();

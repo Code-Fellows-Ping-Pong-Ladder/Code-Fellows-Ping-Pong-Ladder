@@ -2,7 +2,6 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const cors = require('cors');
 const authRouter = require('./routes/auth_routes');
 const userRouter = require('./routes/user_routes');
 const logRouter = require('./routes/log_routes');
@@ -11,7 +10,7 @@ const dbPort = process.env.MONGOLAB_URI || 'mongodb://localhost/dev_db';
 
 mongoose.connect(dbPort);
 
-app.use(cors());
+app.use(express.static(__dirname + '/build'));
 
 app.use('/auth', authRouter);
 app.use('/users', userRouter);
