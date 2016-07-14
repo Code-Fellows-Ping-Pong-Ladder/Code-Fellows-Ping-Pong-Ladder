@@ -36,7 +36,7 @@ app.config(function($routeProvider) {
     resolve: {
       player: function($route, $http) {
         let id = $route.current.params.id;
-        let profileData = $http.get('http://localhost:3000/users/' + id)
+        let profileData = $http.get('/users/' + id)
         .then((res) => {
           let player = res.data.user;
           return player;

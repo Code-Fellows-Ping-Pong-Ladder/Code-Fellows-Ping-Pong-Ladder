@@ -15,7 +15,7 @@ require('../api_server.js');
 
 describe('unit tests for user CRUD routes', () => {
   before((done) => {
-    request('localhost:3000')
+    request('/')
     .post('/auth/signup')
     .send({username: 'saveduser', password:'password'})
     .end((err, user) => {
@@ -32,7 +32,7 @@ describe('unit tests for user CRUD routes', () => {
     });
   });
   it('should get a list of users', (done) => {
-    request('localhost:3000')
+    request('/')
       .get('/users')
       .end((err, res) => {
         expect(err).to.eql(null);
@@ -42,7 +42,7 @@ describe('unit tests for user CRUD routes', () => {
       });
   });
   it('should be able to update a user', (done) => {
-    request('localhost:3000')
+    request('/')
       .put('/users')
       .set({token: testToken})
       .send({_id: testId, hasChallenge: {username: 'testChallenger'}})
@@ -53,7 +53,7 @@ describe('unit tests for user CRUD routes', () => {
       });
   });
   it('should have updated', (done) => {
-    request('localhost:3000')
+    request('/')
       .get('/users')
       .end((err, res) => {
         expect(res.body[0].hasChallenge).to.eql({username: 'testChallenger'});
@@ -61,7 +61,7 @@ describe('unit tests for user CRUD routes', () => {
       });
   });
   it('should be able to delete a user', (done) => {
-    request('localhost:3000')
+    request('/')
       .delete('/users/' + testId)
       .set({token: testToken})
       .end((err, res) => {
@@ -71,7 +71,7 @@ describe('unit tests for user CRUD routes', () => {
       });
   });
   it('should have deleted the user', (done) => {
-    request('localhost:3000')
+    request('/')
       .get('/users')
       .end((err, res) => {
         expect(res.body).to.eql([]);

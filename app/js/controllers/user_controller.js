@@ -12,7 +12,7 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
   this.loggedInUser = AuthService.getCurrentUserNoJSON();
   // console.log('id', playerID && playerID.id );
 
-  const url = 'http://localhost:3000/users/';
+  const url = '/users/';
 
   this.getLadder = function() {
     let currentUser = AuthService.getCurrentUserNoJSON();
@@ -39,7 +39,7 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
 
   this.challenge = function(user) {
     user.hasChallenge = AuthService.getCurrentUserNoJSON();
-    $http.put('http://localhost:3000/users/challenge', user)
+    $http.put('/users/challenge', user)
     .then(() =>{
 
     }, ErrorHandler.logError(`Error adding challenge to ${user.username}.`));
@@ -102,7 +102,7 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
     .then(
       $http({
         method: 'POST',
-        url: 'http://localhost:3000/log',
+        url: '/log',
         data: log
       })
     );
