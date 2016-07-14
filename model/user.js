@@ -17,7 +17,8 @@ const User = new mongoose.Schema({
   longestLStreak: {type: Number},
   hasChallenge: {type: Object, default: null},
   quote: {type: String},
-  image: {type: String}
+  image: {type: String},
+  madeChallenge: {type: Boolean, default: false}
 });
 
 User.methods.hashPassword = function() {

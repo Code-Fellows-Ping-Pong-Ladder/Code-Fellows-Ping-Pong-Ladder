@@ -10,6 +10,7 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
   this.user;
   this.selectedPlayer = {};
   this.loggedInUser = AuthService.getCurrentUserNoJSON();
+  this.madeChallenge;
   // console.log('id', playerID && playerID.id );
 
   const url = '/users/';
@@ -22,7 +23,7 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
       this.ladder = users.sort(function(a,b) {
         return a.rank - b.rank;
       }).map((user) => {
-        if (user.rank + 2 >= currentUser.rank && user.rank !== currentUser.rank && !user.hasChallenge && !currentUser.hasChallenge) {
+        if (user.rank + 2 >= currentUser.rank && user.rank !== currentUser.rank && !user.hasChallenge && !currentUser.hasChallenge && !user.hasChallenged && !user.madeChallenge) {
           user.canChallenge = true;
         }
         return user;
@@ -35,22 +36,32 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
     $http.get(url + user._id)
     .then((res) => {
       this.user = res.data;
-      console.log('MADE IT HERE', this.user)
     }, ErrorHandler.logError('Error getting user'));
   }.bind(this);
 
   this.challenge = function(user) {
     user.hasChallenge = AuthService.getCurrentUserNoJSON();
+    let currentUser = AuthService.getCurrentUserNoJSON();
+    currentUser.madeChallenge = true;
+    $http({
+      method: 'PUT',
+      data: currentUser,
+      headers: {
+        token: AuthService.getToken()
+      },
+      url: url
+    });
     $http.put('/users/challenge', user)
     .then(() =>{
 
     }, ErrorHandler.logError(`Error adding challenge to ${user.username}.`));
-  };
+  }.bind(this);
 
   this.finishMatch = function(challenger, upset) {
     let user = this.loggedInUser;
     this.user.user.hasChallenge = null;
     user.hasChallenge = null;
+    challenger.madeChallenge = false;
     let winner;
     let loser;
     let challengerRank = challenger.rank;
