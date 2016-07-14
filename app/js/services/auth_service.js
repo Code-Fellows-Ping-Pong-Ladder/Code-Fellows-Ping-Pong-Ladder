@@ -69,7 +69,6 @@ module.exports = function(app) {
     };
 
     service.getCurrentUserNoJSON = function() {
-      //console.log(currentUser);
       if (currentUser._id){
         return currentUser;
       }
