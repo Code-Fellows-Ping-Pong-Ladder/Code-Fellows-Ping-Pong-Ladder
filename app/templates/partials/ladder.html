@@ -1,0 +1,10 @@
+<div ng-controller="UserController as userctrl" ng-init="userctrl.getUser(userctrl.loggedInUser)">
+  <challenge-directive ng-hide="!userctrl.user.user.hasChallenge" challenger="userctrl.user.user.hasChallenge"></challenge-directive>
+</div>
+<main ng-controller="UserController as userctrl" ng-init="userctrl.getLadder()">
+  <ladder-directive ladder="userctrl.ladder"></ladder-directive>
+</main>
+<div ng-controller="LogController as logctrl" ng-init="logctrl.getLogs()">
+  <button ng-click="logctrl.toggleLogs()">Show/Hide Logs</button>
+  <log-directive ng-hide="logctrl.hideLogs" logs="logctrl.logs"></log-directive>
+</div>
