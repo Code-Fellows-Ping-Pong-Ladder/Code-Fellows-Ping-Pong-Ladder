@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('UserController', ['$http', '$location', 'ErrorHandler', 'AuthService', 'NavigationService', UserController]);
+  app.controller('UserController', ['$http', '$location', '$window', 'ErrorHandler', 'AuthService', 'NavigationService', UserController]);
 };
 
-function UserController($http, $location, ErrorHandler, AuthService, NavigationService) {
+function UserController($http, $location, $window, ErrorHandler, AuthService, NavigationService) {
   this.$http = $http;
   this.ladder = [];
   this.user;
@@ -24,7 +24,6 @@ function UserController($http, $location, ErrorHandler, AuthService, NavigationS
       }).map((user) => {
         if (user.rank + 2 >= currentUser.rank && user.rank !== currentUser.rank) {
           user.canChallenge = true;
-          console.log('user.canChallenge', user.canChallenge);
         }
         return user;
       });
@@ -47,10 +46,9 @@ function UserController($http, $location, ErrorHandler, AuthService, NavigationS
   };
 
   this.finishMatch = function(challenger, upset) {
-    let user = AuthService.getCurrentUserNoJSON();
-    console.log('USER', user);
+    let user = this.loggedInUser;
     this.user.user.hasChallenge = null;
-    console.log('USER AFTER NULL', user);
+    user.hasChallenge = null;
     let winner;
     let loser;
     let challengerRank = challenger.rank;
@@ -85,6 +83,7 @@ function UserController($http, $location, ErrorHandler, AuthService, NavigationS
     }
     log.winner = winner.username;
     log.loser = loser.username;
+    $window.localStorage.currentUser = JSON.stringify(user);
     $http({
       method: 'PUT',
       data: user,
