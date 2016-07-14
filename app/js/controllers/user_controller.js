@@ -22,7 +22,7 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
       this.ladder = users.sort(function(a,b) {
         return a.rank - b.rank;
       }).map((user) => {
-        if (user.rank + 2 >= currentUser.rank && user.rank !== currentUser.rank && !user.hasChallenge) {
+        if (user.rank + 2 >= currentUser.rank && user.rank !== currentUser.rank && !user.hasChallenge && !currentUser.hasChallenge) {
           user.canChallenge = true;
         }
         return user;
