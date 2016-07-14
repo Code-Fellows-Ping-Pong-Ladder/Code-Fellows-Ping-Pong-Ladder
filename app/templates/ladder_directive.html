@@ -1,6 +1,6 @@
-<section>
+<section ng-init="refreshLadder()">
   <div>
-    <button ng-click="getLadder()">Refresh Ladder</button>
+    <!-- <button ng-click="getLadder()">Refresh Ladder</button> -->
     <ul>
       <li ng-repeat="player in ladder">
         <button class="ladder" ng-click="goToProfile(player)">{{player.username}}</button>
