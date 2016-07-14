@@ -7,4 +7,9 @@
       <button type="submit">Update</button>
     </form>
   </div>
+  <div ng-controller="UserController as userctrl" ng-init="userctrl.getLadder()">
+    <form ng-submit="userctrl.deleteUser(userctrl.loggedInUser)">
+      <button type="submit">Delete</button>
+    </form>
+  </div>
 </section>
