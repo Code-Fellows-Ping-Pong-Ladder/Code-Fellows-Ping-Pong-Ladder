@@ -7,6 +7,7 @@ nav {
   display: flex;
   background: #000000;
   color: #FFFFFF;
+  justify-content: space-between;
 }
 
 span {
@@ -62,9 +63,14 @@ button li {
   display: inline-block;
 }
 
+.clearfix {
+  clear: both;
+}
+
 .ladder {
   width: 70%;
   height: 3em;
+  justify-content: left;
 }
 
 .profile {
@@ -72,13 +78,26 @@ button li {
 }
 
 .challenge {
-  font-size: 10px;
+  font-size: 15px;
+  padding: .5em;
+  margin-left: auto;
 }
 
 .left {
   display: flex;
   justify-content: space-between;
   margin-right: 3em;
+}
+
+.ladder-container {
+  max-width: 960px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.ladder-container li {
+  display: flex;
+  justify-content: start;
 }
 
 .icon-menu {
@@ -96,13 +115,28 @@ button li {
   display: block;
 }
 
-@media only screen and (min-width: 650px) {
+@media only screen and (min-width: 768px) {
+
 
   .icon-menu {
-    display: none;
+    display: block;
   }
 
-  .icon-menu .menu-nav {
+  .menu-nav ul {
+    display: block;
+  }
+
+  .menu-nav li {
     display: inline;
+  }
+
+  .ladder-container {
+    max-width: 600px;
+  }
+
+  .challenge {
+    font-size: 15px;
+    padding: 1em 2em;
+
   }
 }
