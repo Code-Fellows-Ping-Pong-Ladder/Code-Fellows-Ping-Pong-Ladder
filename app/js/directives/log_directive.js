@@ -2,7 +2,7 @@ module.exports = function(app) {
   app.directive('logDirective', function() {
     return {
       scope: {
-        logs: '='
+        logs: '=',
       },
       templateUrl: './templates/logs.html',
       require: '^^ngController',
