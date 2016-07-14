@@ -105,7 +105,7 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
         url: 'http://localhost:3000/log',
         data: log
       })
-    )
+    );
   }.bind(this);
 
   this.deleteUser = function(user) {

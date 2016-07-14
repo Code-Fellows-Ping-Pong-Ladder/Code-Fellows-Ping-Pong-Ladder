@@ -10,12 +10,12 @@ require('./controllers')(app);
 require('./directives')(app);
 
 app.config(function($routeProvider) {
-  $routeProvider.when('/', {
-    templateUrl: './templates/partials/home.html',
+  $routeProvider.when('/signin', {
+    templateUrl: './templates/partials/signin.html',
     controller: 'AuthController',
     controllerAs: 'authctrl'
   })
-  .when('/ladder', {
+  .when('/', {
     templateUrl: './templates/partials/ladder.html',
     controller: 'UserController',
     controllerAs: 'userctrl'

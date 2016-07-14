@@ -38,6 +38,7 @@ module.exports = function(app) {
     };
 
     service.updateProfile = function(player) {
+      console.log(currentUser);
       currentUser = JSON.parse(currentUser);
       currentUser.quote = player.quote != null ? player.quote : currentUser.quote;
       currentUser.image = player.image != null ? player.image : currentUser.image;
