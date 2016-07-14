@@ -29,7 +29,8 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
         return user;
       });
     }, ErrorHandler.logError('Error getting users'));
-  };
+    clearInterval(this.getLadder);
+  }.bind(this);
 
   this.getUser = function(user) {
     if (!user._id) user = JSON.parse(user);
@@ -121,6 +122,7 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
         data: log
       })
     );
+    this.getLadder();
   }.bind(this);
 
   this.deleteUser = function(user) {
@@ -133,30 +135,30 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
       url: url + user._id
     })
     .then(() => {
-      this.ladder.splice(this.ladder.indexOf(user), 1);
-      for(var i = this.ladder.indexOf(user); i < this.ladder.length; i++) {
+      for(var i = 0; i < this.ladder.length; i++) {
         if(this.ladder[i].rank > user.rank) {
           this.ladder[i].rank --;
           $http({
             method: 'PUT',
             data: this.ladder[i],
-            headers: {
-              token: AuthService.getToken()
-            },
-            url: url
+            url: url + 'challenge'
           })
           .then((res) => {
             console.log(res);
           }, ErrorHandler.logError('Error updating database'));
         }
       }
+      this.ladder.splice(this.ladder.indexOf(user), 1);
+      NavigationService.goToSignin();
 
     }, ErrorHandler.logError('Error deleting user'));
-  }.bind(this);
+  };
 
   this.goToProfile = function(player) {
     this.selectedPlayer = player;
     NavigationService.goToProfile(player);
 
   }.bind(this);
+
+  this.refreshLadder = setInterval(this.getLadder, 10000);
 }
