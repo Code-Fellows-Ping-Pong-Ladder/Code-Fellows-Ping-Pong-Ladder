@@ -29,7 +29,8 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
         return user;
       });
     }, ErrorHandler.logError('Error getting users'));
-  };
+    clearInterval(this.getLadder);
+  }.bind(this);
 
   this.getUser = function(user) {
     if (!user._id) user = JSON.parse(user);
@@ -121,6 +122,7 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
         data: log
       })
     );
+    this.getLadder();
   }.bind(this);
 
   this.deleteUser = function(user) {
@@ -159,4 +161,6 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
     NavigationService.goToProfile(player);
 
   }.bind(this);
+
+  this.refreshLadder = setInterval(this.getLadder, 10000);
 }
