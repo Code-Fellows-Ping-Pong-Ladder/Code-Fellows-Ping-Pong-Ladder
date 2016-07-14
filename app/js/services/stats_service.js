@@ -7,7 +7,7 @@ module.exports = function(app) {
     service.updateWinnerStats = function(winner) {
       winner.wins ++;
       winner.wStreak ++;
-      winner.longestWStreak = winner.wStreak > winner.longestWStreak ? winner.wStreak : winner.longestWStreak;
+      winner.longestWStreak = winner.wStreak >= winner.longestWStreak ? winner.wStreak : winner.longestWStreak;
       winner.lStreak = 0;
       return winner;
     };
@@ -15,7 +15,7 @@ module.exports = function(app) {
     service.updateLoserStats = function(loser) {
       loser.losses ++;
       loser.lStreak ++;
-      loser.longestLStreak = loser.lStreak > loser.longestLStreak ? loser.lStreak : loser.longestLStreak;
+      loser.longestLStreak = loser.lStreak >= loser.longestLStreak ? loser.lStreak : loser.longestLStreak;
       loser.wStreak = 0;
       return loser;
     };
