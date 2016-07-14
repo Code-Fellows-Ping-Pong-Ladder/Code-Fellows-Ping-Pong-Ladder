@@ -57,6 +57,7 @@ module.exports = function(app) {
     service.signOut = function() {
       token = $window.localStorage.token = null;
       currentUser = $window.localStorage.currentUser = null;
+      NavigationService.goToSignin();
     };
 
     service.getToken = function() {
