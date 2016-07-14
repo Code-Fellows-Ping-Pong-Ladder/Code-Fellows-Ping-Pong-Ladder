@@ -1,8 +1,14 @@
 <nav>
-  <ul>
-    <li ng-click="goToLadder()">Home</li>
-    <li ng-click="goToProfile()">Profile</li>
-    <li ng-click="goToSignin()">Sign In</li>
-    <li ng-click="signOut()">Sign Out</li>
+  <ul class="left">
+    <li ng-click="goToLadder()">
+      <img src="images/pongfellows.png">PONG FELLOWS
+    </li>
+  </ul>
+  <ul class="icon-menu">
+    <div class="menu-nav">
+      <li class="cf" ng-click="goToProfile()">Profile</li>
+      <li class="cf" ng-click="goToSignin()"><span> SignIn </span></li>
+      <li class="cf" ng-click="signOut()">SignOut</li>
+    </div>
   </ul>
 </nav>
