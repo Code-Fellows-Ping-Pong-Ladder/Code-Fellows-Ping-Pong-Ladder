@@ -19,9 +19,9 @@ describe('log router tests', () => {
     });
   });
   it('should be able to post a log', (done) => {
-    request('/')
+    request('localhost:3000')
       .post('/log')
-      .send({winner:"winTest",loser:"loseTest",winnerRank:2,loserRank:4,time: new Date()})
+      .send({winner:'winTest',loser:'loseTest',winnerRank:2,loserRank:4,time: new Date()})
       .end((err, res) => {
         expect(res.body.winner).to.eql('winTest');
         expect(res.body.loser).to.eql('loseTest');
@@ -33,7 +33,7 @@ describe('log router tests', () => {
       });
   });
   it('should have a log that we can get', (done) => {
-    request('/')
+    request('localhost:3000')
       .get('/log')
       .end((err, res) => {
         expect(res.body[0].winner).to.eql('winTest');

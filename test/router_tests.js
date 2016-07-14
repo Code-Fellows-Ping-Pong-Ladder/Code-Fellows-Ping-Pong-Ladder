@@ -13,7 +13,7 @@ require('../api_server.js');
 
 describe('testing CRUD routes for auth', () => {
   before((done) => {
-    request('/')
+    request('localhost:3000')
     .post('/auth/signup')
     .send({username: 'saveduser', password:'password'})
     .end((err) => {
@@ -28,7 +28,7 @@ describe('testing CRUD routes for auth', () => {
     });
   });
   it('should be able to signup', (done) => {
-    request('/')
+    request('localhost:3000')
       .post('/auth/signup')
       .send({username: 'testuser', password: 'testpassword'})
       .end((err, res) => {
@@ -39,7 +39,7 @@ describe('testing CRUD routes for auth', () => {
       });
   });
   it('should be able to signin', (done) => {
-    request('/')
+    request('localhost:3000')
     .get('/auth/signin')
     .auth('saveduser', 'password')
     .end((err, res) => {
