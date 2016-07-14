@@ -10,12 +10,6 @@ nav {
   justify-content: space-between;
 }
 
-span {
-  background-color: #ff0000;
-  padding: 2px;
-  border-radius: 5px;
-}
-
 h1 {
   text-align: center;
   color: #333333;
@@ -89,6 +83,10 @@ button li {
   margin-right: 3em;
 }
 
+.left:hover {
+  cursor: pointer;
+}
+
 .ladder-container {
   max-width: 960px;
   margin: 0 auto;
@@ -100,35 +98,49 @@ button li {
   justify-content: start;
 }
 
-.icon-menu {
+.web-view {
   display: block;
   justify-content: space-between;
   margin-left: 3em;
 }
 
-.icon-menu .menu-nav{
+.web-view li:hover {
+  background-color: #CF3127;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/*.icon-menu .menu-nav{
   display: none;
 }
 
 
 .icon-menu:hover .menu-nav{
   display: block;
-}
+}*/
+
 
 @media only screen and (min-width: 768px) {
 
+  /*.icon-menu {
+    display: none;
+  }
 
-  .icon-menu {
+
+  .icon-menu .menu-nav{
+    display: none;
+  }
+
+  .icon-menu:hover .menu-nav{
+    display: none;
+  }
+
+  .web-view {
     display: block;
   }
 
-  .menu-nav ul {
-    display: block;
-  }
-
-  .menu-nav li {
+  .web-nav li {
     display: inline;
-  }
+  }*/
 
   .ladder-container {
     max-width: 600px;
