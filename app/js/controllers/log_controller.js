@@ -12,7 +12,19 @@ function LogController($http, ErrorHandler) {
     winnerRank: 1,
     loserRank: 2
   }];
-  this.showLogs;
+  this.hideLogs = true;
+
+  this.toggleLogs = function() {
+    console.log('TOGGLING HIDE', this.hideLogs);
+    // if (this.hideLogs = true) {
+    //   console.log('TOGGLED HIDE TO FALSE');
+    //   this.hideLogs = false;
+    // } else if (this.hideLogs = false) {
+    //   console.log('TOGGLED HIDE TO TRUE');
+    //   this.hideLogs = true;
+    // }
+    this.hideLogs = !this.hideLogs;
+  }.bind(this);
 
   this.getLogs = function() {
 

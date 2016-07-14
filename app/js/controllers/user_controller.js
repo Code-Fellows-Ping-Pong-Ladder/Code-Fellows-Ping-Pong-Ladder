@@ -22,7 +22,7 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
       this.ladder = users.sort(function(a,b) {
         return a.rank - b.rank;
       }).map((user) => {
-        if (user.rank + 2 >= currentUser.rank && user.rank !== currentUser.rank) {
+        if (user.rank + 2 >= currentUser.rank && user.rank !== currentUser.rank && !user.hasChallenge && !currentUser.hasChallenge) {
           user.canChallenge = true;
         }
         return user;
@@ -31,9 +31,11 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
   };
 
   this.getUser = function(user) {
+    if (!user._id) user = JSON.parse(user);
     $http.get(url + user._id)
     .then((res) => {
       this.user = res.data;
+      console.log('MADE IT HERE', this.user)
     }, ErrorHandler.logError('Error getting user'));
   }.bind(this);
 
