@@ -92,7 +92,7 @@ button li {
 }
 
 
-.icon-menu li:hover {
+.icon-menu:hover .menu-nav{
   display: block;
 }
 
