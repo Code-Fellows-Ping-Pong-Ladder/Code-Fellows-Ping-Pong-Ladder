@@ -5,7 +5,7 @@ module.exports = function(app) {
     const service = {};
 
     service.goToLadder = function() {
-      $location.path('/ladder');
+      $location.path('/');
     };
 
     service.goToProfile = function(player) {
@@ -16,8 +16,8 @@ module.exports = function(app) {
       $location.path('/edit');
     };
 
-    service.goHome = function() {
-      $location.path('/');
+    service.goToSignin = function() {
+      $location.path('/signin');
     };
 
     service.goToSignup = function() {

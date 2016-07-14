@@ -12,10 +12,23 @@ function LogController($http, ErrorHandler) {
     winnerRank: 1,
     loserRank: 2
   }];
+  this.hideLogs = true;
+
+  this.toggleLogs = function() {
+    console.log('TOGGLING HIDE', this.hideLogs);
+    // if (this.hideLogs = true) {
+    //   console.log('TOGGLED HIDE TO FALSE');
+    //   this.hideLogs = false;
+    // } else if (this.hideLogs = false) {
+    //   console.log('TOGGLED HIDE TO TRUE');
+    //   this.hideLogs = true;
+    // }
+    this.hideLogs = !this.hideLogs;
+  }.bind(this);
 
   this.getLogs = function() {
 
-    $http.get('http://localhost:3000/log')
+    $http.get('/log')
     .then((res) => {
       let returnedLogs = res.data;
       this.logs = returnedLogs.sort(function(a, b) {
@@ -47,7 +60,7 @@ function LogController($http, ErrorHandler) {
       upset: upset
 
     };
-    $http.post('http://localhost:3000/log')
+    $http.post('/log')
       .send(newLog)
       .then(() => {
         this.getLogs();

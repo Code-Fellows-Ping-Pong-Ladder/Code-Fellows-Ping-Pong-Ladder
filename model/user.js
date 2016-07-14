@@ -8,16 +8,17 @@ const secret = process.env.SECRET || 'changeme';
 const User = new mongoose.Schema({
   username: {type: String, required: true},
   password: {type: String, required: true},
-  wins: {type: Number},
-  losses: {type: Number},
-  wStreak: {type: Number},
-  lStreak: {type: Number},
+  wins: {type: Number, default: 0},
+  losses: {type: Number, default: 0},
+  wStreak: {type: Number, default: 0},
+  lStreak: {type: Number, default: 0},
   rank: {type: Number},
-  longestWStreak: {type: Number},
-  longestLStreak: {type: Number},
+  longestWStreak: {type: Number, default: 0},
+  longestLStreak: {type: Number, default: 0},
   hasChallenge: {type: Object, default: null},
   quote: {type: String},
-  image: {type: String}
+  image: {type: String},
+  madeChallenge: {type: Boolean, default: false}
 });
 
 User.methods.hashPassword = function() {

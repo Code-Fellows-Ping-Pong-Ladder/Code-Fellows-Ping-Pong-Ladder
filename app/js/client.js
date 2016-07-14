@@ -10,12 +10,12 @@ require('./controllers')(app);
 require('./directives')(app);
 
 app.config(function($routeProvider) {
-  $routeProvider.when('/', {
-    templateUrl: './templates/partials/home.html',
+  $routeProvider.when('/signin', {
+    templateUrl: './templates/partials/signin.html',
     controller: 'AuthController',
     controllerAs: 'authctrl'
   })
-  .when('/ladder', {
+  .when('/', {
     templateUrl: './templates/partials/ladder.html',
     controller: 'UserController',
     controllerAs: 'userctrl'
@@ -36,7 +36,7 @@ app.config(function($routeProvider) {
     resolve: {
       player: function($route, $http) {
         let id = $route.current.params.id;
-        let profileData = $http.get('http://localhost:3000/users/' + id)
+        let profileData = $http.get('/users/' + id)
         .then((res) => {
           let player = res.data.user;
           return player;

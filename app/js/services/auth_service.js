@@ -7,7 +7,7 @@ module.exports = function(app) {
     const service = {};
 
     service.signup = function(user) {
-      return $http.post('http://localhost:3000/auth/signup', user)
+      return $http.post('/auth/signup', user)
       .then((res) => {
         console.log(res.data);
         token = res.data.token;
@@ -24,7 +24,7 @@ module.exports = function(app) {
 
       return $http({
         method: 'GET',
-        url: 'http://localhost:3000/auth/signin',
+        url: '/auth/signin',
         headers: {
           authorization: authStr
         }
@@ -38,12 +38,11 @@ module.exports = function(app) {
     };
 
     service.updateProfile = function(player) {
-      currentUser = JSON.parse(currentUser);
       currentUser.quote = player.quote != null ? player.quote : currentUser.quote;
       currentUser.image = player.image != null ? player.image : currentUser.image;
       return $http({
         method: 'PUT',
-        url: 'http://localhost:3000/users',
+        url: '/users',
         data: currentUser,
         headers: {
           token: token
@@ -69,7 +68,12 @@ module.exports = function(app) {
     };
 
     service.getCurrentUserNoJSON = function() {
-      return currentUser;
+      if (currentUser._id){
+        return currentUser;
+      }
+      else {
+        return JSON.parse(currentUser);
+      }
     };
 
     return service;
