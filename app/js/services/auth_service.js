@@ -68,7 +68,12 @@ module.exports = function(app) {
     };
 
     service.getCurrentUserNoJSON = function() {
-      return currentUser;
+      if (currentUser._id){
+        return currentUser;
+      }
+      else {
+        return JSON.parse(currentUser);
+      }
     };
 
     return service;
