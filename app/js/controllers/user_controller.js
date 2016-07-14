@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('UserController', ['$http', '$location', '$window', 'ErrorHandler', 'AuthService', 'NavigationService', 'StatsService', UserController]);
+  app.controller('UserController', ['$http', '$location', '$window', 'ErrorHandler', 'AuthService', 'NavigationService', UserController]);
 };
 
-function UserController($http, $location, $window, ErrorHandler, AuthService, NavigationService, StatsService) {
+function UserController($http, $location, $window, ErrorHandler, AuthService, NavigationService) {
   this.$http = $http;
   this.ladder = [];
   this.user;
@@ -94,8 +94,6 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
       challenger.rank = userRank;
       user.rank = challengerRank;
     }
-    StatsService.updateWinnerStats(winner);
-    StatsService.updateLoserStats(loser);
     log.winner = winner.username;
     log.loser = loser.username;
     $window.localStorage.currentUser = JSON.stringify(user);
@@ -133,26 +131,24 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
       url: url + user._id
     })
     .then(() => {
-      this.ladder.splice(this.ladder.indexOf(user), 1);
-      for(var i = this.ladder.indexOf(user); i < this.ladder.length; i++) {
+      for(var i = 0; i < this.ladder.length; i++) {
         if(this.ladder[i].rank > user.rank) {
           this.ladder[i].rank --;
           $http({
             method: 'PUT',
             data: this.ladder[i],
-            headers: {
-              token: AuthService.getToken()
-            },
-            url: url
+            url: url + 'challenge'
           })
           .then((res) => {
             console.log(res);
           }, ErrorHandler.logError('Error updating database'));
         }
       }
+      this.ladder.splice(this.ladder.indexOf(user), 1);
+      NavigationService.goToSignin();
 
     }, ErrorHandler.logError('Error deleting user'));
-  }.bind(this);
+  };
 
   this.goToProfile = function(player) {
     this.selectedPlayer = player;
