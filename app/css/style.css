@@ -71,6 +71,15 @@ button li {
   color: #FFFFFF;
 }
 
+.profile-stats li {
+  color: #333333;
+}
+
+.player-image {
+  width: 160px;
+  min-height: 160px;
+}
+
 .challenge {
   font-size: 15px;
   padding: .5em;
@@ -109,38 +118,8 @@ button li {
   border-radius: 5px;
   cursor: pointer;
 }
-/*.icon-menu .menu-nav{
-  display: none;
-}
-
-
-.icon-menu:hover .menu-nav{
-  display: block;
-}*/
-
 
 @media only screen and (min-width: 768px) {
-
-  /*.icon-menu {
-    display: none;
-  }
-
-
-  .icon-menu .menu-nav{
-    display: none;
-  }
-
-  .icon-menu:hover .menu-nav{
-    display: none;
-  }
-
-  .web-view {
-    display: block;
-  }
-
-  .web-nav li {
-    display: inline;
-  }*/
 
   .ladder-container {
     max-width: 600px;
