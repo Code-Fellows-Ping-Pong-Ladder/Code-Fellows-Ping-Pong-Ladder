@@ -3,6 +3,7 @@ require('angular-mocks');
 require('../app/js/client.js');
 
 describe('controller tests', () => {
+  let $httpBackend;
   let authctrl;
   let logctrl;
   let plyrctrl;
