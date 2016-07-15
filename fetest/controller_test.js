@@ -3,10 +3,9 @@ require('angular-mocks');
 require('../app/js/client.js');
 
 describe('controller tests', () => {
+  let $httpBackend;
   let authctrl;
   let logctrl;
-  let plyrctrl;
-  let usrctrl;
   beforeEach(()=> {
     angular.mock.module('Pong-App');
     angular.mock.inject(function($controller, _$httpBackend_) {
@@ -39,5 +38,5 @@ describe('controller tests', () => {
   });
   it('signup should be a function on authctrl', () => {
     expect(typeof authctrl.signup).toBe('function');
-  })
+  });
 });
