@@ -20,7 +20,7 @@ describe('unit tests for user CRUD routes', () => {
     .send({username: 'saveduser', password:'password'})
     .end((err, user) => {
       testToken = user.body.token;
-      testId = user.body._id;
+      testId = user.body.currentUser._id;
       if (err) console.log('error message');
       done();
     });
