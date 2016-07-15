@@ -7,6 +7,7 @@ require('../app/js/client');
 const challenge = require('../app/templates/challenge_directive.html');
 const log = require('../app/templates/logs.html');
 const ladder = require('../app/templates/ladder_directive.html');
+const signIn = require('../app/templates/signin_directive.html');
 
 describe('directive tests', () => {
   let $httpBackend;
@@ -94,13 +95,35 @@ describe('directive tests', () => {
       username: 'test'
     };
 
-    let element = angular.element('<ladder-directive ladder="userctrl.ladder"></ladder-directive>');
+    let element = angular.element('<ladder-directive ladder="player"></ladder-directive>');
     element.data('$ngControllerController', {});
     let link = $compile(element);
     let directive = link($scope);
     $scope.$digest();
     $httpBackend.flush();
 
-    console.log(directive);
+    let button = directive.find('button');
+    let buttonattr = button.attr('ng-click');
+
+    expect(buttonattr).toBe('goToProfile(player)');
+  });
+
+  it('should test the signin directive', () => {
+    $httpBackend.expectGET('./templates/signin_directive.html')
+    .respond(200, signIn);
+
+    let element = angular.element('<signin-directive></signin-directive>');
+    let link = $compile(element);
+    let directive = link($scope);
+    $scope.$digest();
+    $httpBackend.flush();
+
+    let h1 = directive.find('h1');
+    let h1text = h1.text();
+    let button = directive.find('button');
+    let buttontext = button.text();
+
+    expect(h1text).toBe('Welcome to Pong Fellows');
+    expect(buttontext).toBe('Sign inJoin!');
   });
 });
