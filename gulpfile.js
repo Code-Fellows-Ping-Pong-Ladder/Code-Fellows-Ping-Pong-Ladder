@@ -8,7 +8,9 @@ const mocha = require('gulp-mocha');
 const paths = {
   js: __dirname + '/app/**/*.js',
   html: __dirname + '/app/**/*.html',
-  css: __dirname + '/app/**/*.css'
+  css: __dirname + '/app/**/*.css',
+  ico: __dirname + '/app/**/*',
+  images: __dirname + '/app/**/*.png'
 };
 
 gulp.task('clean', ()=>{
@@ -26,6 +28,16 @@ gulp.task('copy-css', ['clean'], ()=>{
     .pipe(gulp.dest('./build'));
 });
 
+gulp.task('copy-ico', ['clean'], ()=>{
+  return gulp.src(paths.ico)
+  .pipe(gulp.dest('./build'));
+});
+
+gulp.task('copy-images', ['clean'], ()=>{
+  return gulp.src(paths.images)
+  .pipe(gulp.dest('./build'));
+});
+
 gulp.task('bundle', ['clean'], ()=>{
   return gulp.src(paths.js)
     .pipe(webpack({
@@ -37,14 +49,21 @@ gulp.task('bundle', ['clean'], ()=>{
 });
 
 gulp.task('bundle:test', () => {
-  return gulp.src(__dirname + '/test/*_test.js')
+  return gulp.src(__dirname + '/fetest/*_test.js')
     .pipe(webpack({
       output: {
         filename: 'test_bundle.js'
+      },
+      module: {
+        loaders: [{
+          test: /\.html$/,
+          loader: 'html'
+        }]
       }
     }))
-    .pipe(gulp.dest(__dirname + '/test'));
+    .pipe(gulp.dest(__dirname + '/fetest'));
 });
+
 
 gulp.task('test', () => {
   gulp.src('test/*.js')
@@ -55,6 +74,6 @@ gulp.task('watch', ()=>{
   gulp.watch('./app/*', ['build']);
 });
 
-gulp.task('build', ['clean', 'copy-html', 'copy-css', 'bundle']);
+gulp.task('build', ['clean', 'copy-html', 'copy-css', 'copy-ico', 'copy-images', 'bundle']);
 
-gulp.task('default', ['build', 'test']);
+gulp.task('default', ['build']);

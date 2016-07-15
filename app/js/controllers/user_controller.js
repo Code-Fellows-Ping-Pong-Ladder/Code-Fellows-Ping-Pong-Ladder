@@ -11,7 +11,6 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
   this.selectedPlayer = {};
   this.loggedInUser = AuthService.getCurrentUserNoJSON();
   this.madeChallenge;
-  // console.log('id', playerID && playerID.id );
 
   const url = '/users/';
 
