@@ -20,7 +20,7 @@ describe('unit tests for user CRUD routes', () => {
     .send({username: 'saveduser', password:'password'})
     .end((err, user) => {
       testToken = user.body.token;
-      testId = user.body._id;
+      testId = user.body.currentUser._id;
       if (err) console.log('error message');
       done();
     });
@@ -43,8 +43,8 @@ describe('unit tests for user CRUD routes', () => {
   });
   it('should be able to update a user', (done) => {
     request('localhost:3000')
-      .put('/users')
-      .set({token: testToken})
+      .put('/users/challenge')
+      // .set({token: testToken})
       .send({_id: testId, hasChallenge: {username: 'testChallenger'}})
       .end((err, res) => {
         expect(err).to.eql(null);
