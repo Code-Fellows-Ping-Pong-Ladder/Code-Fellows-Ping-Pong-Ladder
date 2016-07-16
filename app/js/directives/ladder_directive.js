@@ -7,7 +7,7 @@ module.exports = function(app) {
         ladder: '='
       },
       templateUrl: './templates/ladder_directive.html',
-      require: '^^ngController',
+      require: '^ngController',
       link: function($scope, elem, attr, controller) {
         $scope.getLadder = controller.getLadder;
         $scope.goToProfile = controller.goToProfile;

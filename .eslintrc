@@ -22,7 +22,8 @@
 "es6": true,
 "node": true,
 "browser": true,
-"mocha": true
+"mocha": true,
+"jasmine": true
 },
 "globals": {
 "describe": false,
