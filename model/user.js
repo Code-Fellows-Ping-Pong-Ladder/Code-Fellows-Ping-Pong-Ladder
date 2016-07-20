@@ -7,7 +7,7 @@ const secret = process.env.SECRET || 'changeme';
 
 const User = new mongoose.Schema({
   username: {type: String, required: true},
-  password: {type: String, required: true},
+  password: {type: String, required: true, select: false},
   wins: {type: Number, default: 0},
   losses: {type: Number, default: 0},
   wStreak: {type: Number, default: 0},

@@ -25,7 +25,7 @@ router.post('/signup', bodyParser, (req, res, next) => {
         res.json({currentUser: user, token: newToken});
       });
     });
-  });
+  }).select('+password');
 });
 
 router.get('/signin', basicHTTP, (req, res, next) => {
@@ -34,5 +34,5 @@ router.get('/signin', basicHTTP, (req, res, next) => {
     if (!user.comparePassword(req.auth.password)) return next(new Error('Sorry. Looks like your password was fucky.'));
     let newToken = user.generateToken();
     res.json({currentUser: user, token: newToken});
-  });
+  }).select('+password');
 });

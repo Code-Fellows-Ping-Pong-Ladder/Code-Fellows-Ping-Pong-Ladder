@@ -16,6 +16,9 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   let _id = req.params.id;
+  let token = req.headers.token;
+
+  //jwt.tokenCheck(token);
   User.findOne({_id}, (err, user) => {
     if (err) return next(err);
     res.json({user});
@@ -40,9 +43,13 @@ router.put('/challenge', bodyParser, (req, res, next) => {
 
 router.delete('/:id', jwt, (req, res, next) => {
   let _id = req.params.id;
-  User.findOneAndRemove({_id}, (err) => {
-    if(err) return next(err);
-    let message = 'successfully deleted';
-    res.json({message});
-  });
+  let token = req.headers.token;
+  if (jwt.tokenCheck(token) === _id) {
+    User.findOneAndRemove({_id}, (err) => {
+      if(err) return next(err);
+      let message = 'successfully deleted';
+      res.json({message});
+    });
+  }
+  res.json('No hacking allowed');
 });

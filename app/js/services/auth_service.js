@@ -38,6 +38,7 @@ module.exports = function(app) {
     };
 
     service.updateProfile = function(player) {
+      currentUser = typeof currentUser == 'string' ? JSON.parse(currentUser) : currentUser;
       currentUser.quote = player.quote != null ? player.quote : currentUser.quote;
       currentUser.image = player.image != null ? player.image : currentUser.image;
       return $http({
