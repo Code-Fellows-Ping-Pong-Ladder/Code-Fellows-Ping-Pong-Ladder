@@ -49,14 +49,21 @@ gulp.task('bundle', ['clean'], ()=>{
 });
 
 gulp.task('bundle:test', () => {
-  return gulp.src(__dirname + '/test/*_test.js')
+  return gulp.src(__dirname + '/fetest/*_test.js')
     .pipe(webpack({
       output: {
         filename: 'test_bundle.js'
+      },
+      module: {
+        loaders: [{
+          test: /\.html$/,
+          loader: 'html'
+        }]
       }
     }))
-    .pipe(gulp.dest(__dirname + '/test'));
+    .pipe(gulp.dest(__dirname + '/fetest'));
 });
+
 
 gulp.task('test', () => {
   gulp.src('test/*.js')
@@ -69,4 +76,4 @@ gulp.task('watch', ()=>{
 
 gulp.task('build', ['clean', 'copy-html', 'copy-css', 'copy-ico', 'copy-images', 'bundle']);
 
-gulp.task('default', ['build', 'test']);
+gulp.task('default', ['build']);
