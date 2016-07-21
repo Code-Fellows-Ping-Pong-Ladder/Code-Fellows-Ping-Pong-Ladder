@@ -11,6 +11,11 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
   this.selectedPlayer = {};
   this.loggedInUser = AuthService.getCurrentUserNoJSON();
   this.madeChallenge;
+  this.checkToken = function() {
+    if (!$window.localStorage.token) return NavigationService.goToSignin();
+  };
+
+  this.checkToken();
 
   const url = '/users/';
 
@@ -21,29 +26,35 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
       let users = res.data;
       this.ladder = users.sort(function(a,b) {
         return a.rank - b.rank;
-      }).map((user) => {
-        if (user.rank + 2 >= currentUser.rank && user.rank !== currentUser.rank && !user.hasChallenge && !currentUser.hasChallenge && !user.hasChallenged && !user.madeChallenge) {
-          user.canChallenge = true;
-        }
-        return user;
       });
+      if ($window.localStorage.token) {
+        this.ladder.map((user) => {
+          if (user.rank + 2 >= currentUser.rank && user.rank !== currentUser.rank && !user.hasChallenge && !currentUser.hasChallenge && !user.hasChallenged && !user.madeChallenge) {
+            user.canChallenge = true;
+          }
+          return user;
+        });
+      }
     }, ErrorHandler.logError('Error getting users'));
     clearInterval(this.getLadder);
   }.bind(this);
 
   this.getUser = function(user) {
-    if (!user._id) user = JSON.parse(user);
-    $http({
-      method: 'GET',
-      headers: {
-        token: AuthService.getToken()
-      },
-      url: url + user._id
-    })
-    .then((res) => {
-      this.user = res.data;
-    }, ErrorHandler.logError('Error getting user'));
+    if (user) {
+      if (typeof user == 'string') return user = JSON.parse(user);
+      $http({
+        method: 'GET',
+        headers: {
+          token: AuthService.getToken()
+        },
+        url: url + user._id
+      })
+      .then((res) => {
+        this.user = res.data;
+      }, ErrorHandler.logError('Error getting user'));
+    } return;
   }.bind(this);
+
 
   this.challenge = function(user) {
     user.hasChallenge = AuthService.getCurrentUserNoJSON();

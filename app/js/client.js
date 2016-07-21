@@ -19,6 +19,17 @@ app.config(function($routeProvider) {
     templateUrl: './templates/partials/ladder.html',
     controller: 'UserController',
     controllerAs: 'userctrl'
+    // resolveRedirectTo: function($window) {
+    //   console.log($window);
+    //   if ($window.localStorage.token == null || !$window.localStorage.token) return '/signin';
+    // }
+    // resolve: {
+    //   redirect: function($window, NavigationService) {
+    //     if ($window.localStorage.token === null || !$window.localStorage.token) {
+    //       NavigationService.goToSignin();
+    //     }
+    //   }
+    // }
   })
   .when('/signup', {
     templateUrl: './templates/signup_directive.html',
