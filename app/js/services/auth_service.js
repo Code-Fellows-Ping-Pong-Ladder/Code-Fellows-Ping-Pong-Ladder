@@ -56,8 +56,8 @@ module.exports = function(app) {
     };
 
     service.signOut = function() {
-      token = $window.localStorage.token = null;
-      currentUser = $window.localStorage.currentUser = null;
+      $window.localStorage.removeItem('token');
+      $window.localStorage.removeItem('currentUser');
       NavigationService.goToSignin();
     };
 
@@ -70,7 +70,7 @@ module.exports = function(app) {
     };
 
     service.getCurrentUserNoJSON = function() {
-      if (currentUser._id){
+      if (typeof currentUser != 'string') {
         return currentUser;
       }
       else {
