@@ -18,7 +18,6 @@ router.get('/:id', (req, res, next) => {
   let _id = req.params.id;
   let token = req.headers.token;
 
-  //jwt.tokenCheck(token);
   User.findOne({_id}, (err, user) => {
     if (err) return next(err);
     res.json({user});
