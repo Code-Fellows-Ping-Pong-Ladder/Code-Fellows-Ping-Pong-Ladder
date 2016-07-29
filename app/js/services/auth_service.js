@@ -64,7 +64,8 @@ module.exports = function(app) {
     service.getToken = function() {
       return token;
     };
-
+    //this and the method below are basically the same thing with an early on type
+    //check. You could probably just use the one below.
     service.getCurrentUser = function() {
       return JSON.parse(currentUser);
     };

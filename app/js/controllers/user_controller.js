@@ -86,6 +86,21 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
     let log = {
       time: new Date().toString()
     };
+    //there are a few ways this could be condensed. I might use ternarys
+    //to handle the parts that are common across all of them to start. Try
+    //and keep an eye out for repetition in your code.
+
+    // winner = upset ? user : challenger;
+    // loser = upset ? challenger : user;
+    // log.winnerRank = winner.rank;
+    // log.loserRank = loser.rank;
+    // if (winner.rank < loser.rank) {
+    //  let tempRank = winner.rank;
+    //  winner.rank = loser.rank;
+    //  loser.rank = tempRank;
+    // }
+
+
     if (!upset && userRank > challengerRank) {
       winner = user;
       loser = challenger;
@@ -116,6 +131,13 @@ function UserController($http, $location, $window, ErrorHandler, AuthService, Na
     log.winner = winner.username;
     log.loser = loser.username;
     $window.localStorage.currentUser = JSON.stringify(user);
+    //since this call involves 3 HTTP calls effectively chained together in
+    //promises I would definitely involve some error handling. It could be
+    //as simple as a catch at the end of the chain but as is that's a lot
+    //of places an unhandled error could pop up. I also might have created an
+    //endpoint to handle creating a challenge that dealt with the user, the
+    //the challenge, and the log so that it could be handled in one request.
+
     $http({
       method: 'PUT',
       data: user,

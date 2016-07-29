@@ -43,6 +43,9 @@ router.put('/challenge', bodyParser, (req, res, next) => {
 router.delete('/:id', jwt, (req, res, next) => {
   let _id = req.params.id;
   let token = req.headers.token;
+  //here would be the spot to check and see that the user is who they
+  //say they are. Simplest way to do so being checking that the id sent
+  //across and the id on the token match.
   if (jwt.tokenCheck(token) === _id) {
     User.findOneAndRemove({_id}, (err) => {
       if(err) return next(err);
@@ -50,5 +53,6 @@ router.delete('/:id', jwt, (req, res, next) => {
       res.json({message});
     });
   }
+  //not a particularly strong security measure.
   res.json('No hacking allowed');
 });

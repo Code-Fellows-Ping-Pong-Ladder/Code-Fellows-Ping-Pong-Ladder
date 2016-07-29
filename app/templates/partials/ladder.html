@@ -4,6 +4,10 @@
 <main ng-controller="UserController as userctrl" ng-init="userctrl.getLadder()">
   <ladder-directive ladder="userctrl.ladder"></ladder-directive>
 </main>
+<!-- It looks like this is the only place that LogController is used. If that's the case
+  it may have been better to encapsulate all of this logic in a directive. Essentially
+  this whole div could have been your log directive rather than just the part a few
+  lines below. -->
 <div ng-controller="LogController as logctrl" ng-init="logctrl.getLogs()">
   <button ng-click="logctrl.toggleLogs()">Show/Hide Logs</button>
   <log-directive ng-hide="logctrl.hideLogs" logs="logctrl.logs"></log-directive>
