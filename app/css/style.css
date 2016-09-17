@@ -5,7 +5,7 @@ body {
 
 nav {
   display: flex;
-  background: #000000;
+  background: #0D0D0D;
   color: #FFFFFF;
   justify-content: space-between;
 }
@@ -27,8 +27,8 @@ div {
 
 img {
   color: #FFFFFF;
-  width: 2em;
-  height: 2em;
+  width: 3em;
+  height: 3em;
   text-align: left;
 }
 
@@ -38,10 +38,10 @@ ul {
 }
 
 button {
-  background: #CF3127;
+  background: #D13328;
   margin: 5px;
   padding: 4px;
-  color: #1f2e2e;
+  color: #ffffff;
   border: none;
   border-radius: 30px;
   font-size: 20px;
@@ -67,6 +67,20 @@ button li {
   justify-content: left;
 }
 
+.menu-class {
+
+}
+
+.pong {
+  width: 220px;
+}
+
+.pong span{
+  font-size: 20px;
+  position: relative;
+  bottom: 20px;
+}
+
 .profile {
   color: #FFFFFF;
 }
@@ -89,7 +103,7 @@ button li {
 .left {
   display: flex;
   justify-content: space-between;
-  margin-right: 3em;
+  margin-right: 2em;
 }
 
 .left:hover {
@@ -110,7 +124,7 @@ button li {
 .web-view {
   display: block;
   justify-content: space-between;
-  margin-left: 3em;
+  margin-left: 2em;
 }
 
 .web-view li:hover {
