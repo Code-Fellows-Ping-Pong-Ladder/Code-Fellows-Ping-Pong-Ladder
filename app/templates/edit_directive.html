@@ -1,9 +1,10 @@
 <section>
   <h1>Update your account</h1>
   <div>
-    <form ng-submit="authctrl.updateProfile(authctrl.updatedUser)">
-      <textarea ng-model="authctrl.updatedUser.quote" maxlength="140" placeholder="Got some thing to say? (in under 140 characters)"></textarea>
+    <form ng-submit="authctrl.updateProfile(authctrl.updatedUser)" class="signin">
+      <input type="text" ng-model="authctrl.updatedUser.quote" maxlength="140" placeholder="New quote?" />
       <input type="text" ng-model="authctrl.updatedUser.image" placeholder="Add image url" />
+      <br />
       <button type="submit">Update</button>
     </form>
   </div>
