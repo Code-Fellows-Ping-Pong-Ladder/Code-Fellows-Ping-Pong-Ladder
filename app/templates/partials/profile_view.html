@@ -1,9 +1,9 @@
 <section>
   <button ng-if="myProfile" class="edit" ng-click="goToEdit()">Edit</button>
-  <h1>username: {{player.username}}</h1>
+  <h1>{{player.username}}</h1>
   <div>
     <ul class="profile-stats">
-      <div class="image">
+      <div class="image-container">
         <img class="player-image" src="{{player.image}}" title="{{player.username}}" alt="image of {{player.username}}"/>
       </div>
       <li>{{player.quote}}</li>
