@@ -1,6 +1,7 @@
 body {
-  font-family: helvetica;
+  font-family: 'Source Code Pro', monospace;
   background: #FFFFFF;
+  font-weight: 500;
 }
 
 nav {
@@ -38,15 +39,17 @@ ul {
 }
 
 button {
+  font-family: 'Source Code Pro', monospace;
   background: #D13328;
   margin: 5px;
-  padding: 4px;
+  padding: 4px 12px;
   color: #ffffff;
   border: none;
   border-radius: 30px;
   font-size: 20px;
   transition: 350ms all;
   cursor: pointer;
+  font-weight: 700;
 }
 
 button:hover {
@@ -79,6 +82,7 @@ button li {
   font-size: 20px;
   position: relative;
   bottom: 20px;
+  font-weight: 700;
 }
 
 .profile {
@@ -103,7 +107,7 @@ button li {
 .left {
   display: flex;
   justify-content: space-between;
-  margin-right: 2em;
+  margin-right: 0em;
 }
 
 .left:hover {
@@ -124,11 +128,11 @@ button li {
 .web-view {
   display: block;
   justify-content: space-between;
-  margin-left: 2em;
+  margin-left: 0em;
 }
 
 .web-view li:hover {
-  background-color: #CF3127;
+  color: #D13328;
   border-radius: 5px;
   cursor: pointer;
 }
