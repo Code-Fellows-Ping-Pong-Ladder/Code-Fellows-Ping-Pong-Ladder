@@ -17,7 +17,7 @@ const User = new mongoose.Schema({
   longestLStreak: {type: Number, default: 0},
   hasChallenge: {type: Object, default: null},
   quote: {type: String},
-  image: {type: String},
+  image: {type: String, default: './images/defaultavatar.png'},
   madeChallenge: {type: Boolean, default: false}
 });
 
