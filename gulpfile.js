@@ -4,6 +4,7 @@ const gulp = require('gulp');
 const webpack = require('webpack-stream');
 const clean = require('gulp-clean');
 const mocha = require('gulp-mocha');
+const babel = require('gulp-babel');
 
 const paths = {
   js: __dirname + '/app/**/*.js',
@@ -48,6 +49,19 @@ gulp.task('bundle', ['clean'], ()=>{
     .pipe(gulp.dest('./build'));
 });
 
+gulp.task('package', ['clean'], ()=>{
+  return gulp.src(paths.js)
+    .pipe(webpack({
+      output: {
+        filename: 'bundle.js'
+      }
+    }))
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest('./build'));
+});
+
 gulp.task('bundle:test', () => {
   return gulp.src(__dirname + '/fetest/*_test.js')
     .pipe(webpack({
@@ -75,5 +89,7 @@ gulp.task('watch', ()=>{
 });
 
 gulp.task('build', ['clean', 'copy-html', 'copy-css', 'copy-ico', 'copy-images', 'bundle']);
+
+gulp.task('production', ['clean', 'copy-html', 'copy-css', 'copy-ico', 'copy-images', 'package']);
 
 gulp.task('default', ['build']);
