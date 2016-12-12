@@ -1,5 +1,7 @@
 'use strict';
-
+//Seems like this functionality probably could have been incorporated into the ladder
+//directive. Or maybe a player directive that encapsulated all of the logic handled at
+//that level.
 module.exports = function(app) {
   app.directive('challengeDirective', function () {
     return {

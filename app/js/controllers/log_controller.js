@@ -6,6 +6,7 @@ module.exports = function(app){
 
 function LogController($http, ErrorHandler) {
   this.$http = $http;
+  //I'd get stuff like this out of final versions.
   this.logs = [{
     winner: 'testWinner',
     loser: 'testLoser',
@@ -31,6 +32,8 @@ function LogController($http, ErrorHandler) {
   };
 
   this.postLog = function(user, challenger, unseat) {
+    //this looks really similar to parts of the logic in the finishMatch method on
+    //the userController. Could they have been combined in part?
     let winner;
     let loser;
     let upset;

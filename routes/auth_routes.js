@@ -15,6 +15,8 @@ router.post('/signup', bodyParser, (req, res, next) => {
   User.findOne({username: req.body.username}, (err, user) => {
     if (err || user) return next(new Error('Error. Someone else may have this username already.'));
     User.find({}, (err, users) => {
+      //probably best to take this out of final versions. This effectively logging out your users
+      //it's a good idea to limit the amount of information that's available.
       console.log(users);
       if (err) return next(new Error('Could not rank player'));
       freshUser.rank = users.length + 1;
